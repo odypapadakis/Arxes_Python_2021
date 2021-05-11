@@ -1,7 +1,8 @@
 from directory_selection import *
+from Downloader import *
 
-# Initially for the directory where the user wants the data ( databases etc ) to be stored
+
 directory_change()
+downloader()
 
-
-mb.showinfo("Main Completed", "  Success!\t\t")
+# mb.showinfo("Main Completed", "  Success!\t\t")
