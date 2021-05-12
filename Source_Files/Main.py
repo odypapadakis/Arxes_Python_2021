@@ -3,6 +3,7 @@ from downloader import *
 import tkinter as tk
 from tkinter import messagebox as mb
 
+# Initialize tkInter
 root = tk.Tk()
 # root.withdraw()
 
@@ -11,6 +12,7 @@ root.title("Ody's Downloader")
 root.geometry("600x300+650+400")  # Width x Height + Padding left + Padding top
 
 directory_change()
+
 downloader()
 
 # extractor()

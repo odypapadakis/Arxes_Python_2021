@@ -5,16 +5,17 @@ import tkinter as tk
 from tkinter import messagebox as mb
 import gzip
 import requests
-import os.path
 from os import path
+
 
 def downloader():
 
     url = "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/tin00175.tsv.gz"
 
     try:
-        response = requests.get(url, timeout=9.00)   # Expect a response within 9 seconds
-    except Exception as a_ex:
+        # response =
+        requests.get(url, timeout=9.00)   # Expect a response within 9 seconds
+    except Exception:
         # print("ERROR! \n Unable to reach Website", url)
         # print(a_ex)                         # Return the error type
         # exit(0)
@@ -29,16 +30,14 @@ def downloader():
 
     filename = "Data.tsv"
 
-
     root = tk.Tk()
     root.withdraw()
 
-    if (  path.isfile(filename)    ):
-        overwrite = mb.askquestion("File already extists","Overwrite --> " + filename + " <-- ?? " )
+    if (path.isfile(filename)):
+        overwrite = mb.askquestion("File already exists", "Overwrite --> " + filename + " <-- ?? ")
         if (overwrite == "no"):
             mb.showinfo("No Changes made", " Exiting\t\t")
             exit(0)
-
 
     # Write the data to disk, in the file named filename
     f = open(filename, "wb")
