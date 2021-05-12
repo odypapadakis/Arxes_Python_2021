@@ -23,8 +23,8 @@ root.geometry("600x300+650+400")  # Width x Height + Padding left + Padding top
 #
 # extractor()
 # db_stuff()
-draw_charts()
-
+# draw_charts()
+data_processor()
 
 
 # mb.showinfo("Job done", "Great Success!\t\t")
