@@ -1,8 +1,19 @@
 from directory_selection import *
-from Downloader import *
+from downloader import *
+import tkinter as tk
+from tkinter import messagebox as mb
+
+
+
+
 
 
 directory_change()
 downloader()
 
-# mb.showinfo("Main Completed", "  Success!\t\t")
+
+
+# extractor()
+
+
+mb.showinfo("Jobe done", "Great Success!\t\t")
