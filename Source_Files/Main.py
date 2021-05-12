@@ -1,7 +1,9 @@
 from directory_selection import *
 from downloader import *
+
 import tkinter as tk
 from tkinter import messagebox as mb
+
 
 # Initialize tkInter
 root = tk.Tk()
