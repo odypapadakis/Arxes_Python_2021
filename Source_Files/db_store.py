@@ -7,3 +7,5 @@ def db_stuff():
         user="yourusername",
         password="yourpassword"
     )
+
+    print(mydb) 
