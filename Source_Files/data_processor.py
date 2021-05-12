@@ -72,23 +72,48 @@ def data_processor():
         temp_row = []
         return temp_row
 
-
+    #  Create the titles Row
     temp_row = empty_temp_row()
-    temp_row.append("")
-    temp_row.append("")
+    for i in range(2):
+        temp_row.append("")
+    # temp_row.append("")
     for i in range(len(Type)):
         temp_row.append(Type[i])
+
     print(temp_row)
     Rows.append(temp_row)
     print("Rows is: ", Rows)
 
+    #  Create the year row
+    temp_row = empty_temp_row()
+    for i in Column_list_years:
+        # Create a row that contains the year
+        temp_row.append(in_tsv[0][i])
+        Rows.append(temp_row)
+        temp_row = empty_temp_row()
+
+        # For each year
+        for i in range(2):
+            temp_row.append("")
+        for j in Row_list_GR:
+            temp_row.append(in_tsv[j][i])
+            Rows.append(temp_row)
+        temp_row = empty_temp_row()
+
+
+
+
+    for i in range(len(Rows)):
+        print(Rows[i])
 
 
 
     my_csv = open('processed_data.csv','w', newline='')
     writer = csv.writer(my_csv)
-    writer.writerow(Rows[0])
-    writer.writerow(Rows[0])
+    for i in range(len(Rows)):
+        writer.writerow(Rows[i])
+
+    # writer.writerow(Rows[0])
     #
     # #   Create the titles (foreigner local total
     # for i  in range(len(Type)):
