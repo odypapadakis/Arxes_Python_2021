@@ -58,10 +58,21 @@ def data_processor():
     #         (in_tsv[j][0])
     # print("-------------DEBUG--------------------------------------")
     temp_row = ["", "", "", "", "", "", "", "", "", "a"]
+    Rows = []
+    print(Rows)
+    Rows.append(["aa","bb","cc"])
+    print(Rows)
 
     def clear_temp_row():
         temp_row = ["", "", "", "", "", "", "", "", "", ""]
         return temp_row
+
+    def empty_temp_row()
+        temp_row = []
+        return temp_row
+
+
+
 
 
     my_csv = open('processed_data.csv','w')
