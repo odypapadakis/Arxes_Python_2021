@@ -37,7 +37,7 @@ def data_processor():
     #            FOR,LOC,TOTAL
     Row_list_GR = [11,51,91]
     Row_list_ES = [12,52,92]
-    Type = ["FOR","LOC","TOTAL"]
+    Type = ["FOREIGNERS","LOCALS","TOTAL"]
 
     Column_list_years = [9,10,11,12]
 
@@ -57,31 +57,52 @@ def data_processor():
     #     print\
     #         (in_tsv[j][0])
     # print("-------------DEBUG--------------------------------------")
+    temp_row = ["", "", "", "", "", "", "", "", "", "a"]
+
+    def clear_temp_row():
+        temp_row = ["", "", "", "", "", "", "", "", "", ""]
+        return temp_row
+
+
+    my_csv = open('processed_data.csv','w')
+    writer = csv.writer(my_csv)
+
+    #   Create the titles (foreigner local total
+    for i  in range(len(Type)):
+        temp_row[i+1] = Type[i]
+    # print(temp_row)
+    writer.writerow(temp_row)
+
+    temp_row = clear_temp_row()
+    temp_row[0] = in_tsv[0][9]
+    # print(temp_row)
+    writer.writerow(temp_row)
+
     print("\n-----------------")
 
 
-    for i in Column_list_years:
-        #   Print the year
-        print(in_tsv[0][i],)
-
-        print("Greece")
-        k = 0;
-        for j in Row_list_GR:
-            # print(in_tsv[j][0], end=" ")
-            print(Type[k],end=" ")
-            print(in_tsv[j][i],end =" ")
-            k = k+1
-
-        print("\n")
-
-        print("Spain")
-        k = 0;
-        for j in Row_list_ES:
-            # print(in_tsv[j][0], end=" ")
-            print(Type[k], end=" ")
-            print(in_tsv[j][i], end=" ")
-
-        print("\n-----------------")
+    # for i in Column_list_years:
+    #     #   Print the year
+    #     print(in_tsv[0][i])
+    #
+    #     print("Greece")
+    #     k = 0
+    #     for j in Row_list_GR:
+    #         # print(in_tsv[j][0], end=" ")
+    #         print(Type[k],end=" ")
+    #         print(in_tsv[j][i],end =" ")
+    #         k = k+1
+    #
+    #     print("\n")
+    #
+    #     print("Spain")
+    #     k = 0
+    #     for j in Row_list_ES:
+    #         # print(in_tsv[j][0], end=" ")
+    #         print(Type[k], end=" ")
+    #         print(in_tsv[j][i], end=" ")
+    #
+    #     print("\n-----------------")
 
 
 
