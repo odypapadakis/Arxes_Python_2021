@@ -47,3 +47,4 @@ def data_processor():
             num = int(mycsv[j][i])
             print(format(num, ',') , "|",end =" ")
         print("\n")
+
