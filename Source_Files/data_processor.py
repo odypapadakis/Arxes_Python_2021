@@ -57,39 +57,51 @@ def data_processor():
     #     print\
     #         (in_tsv[j][0])
     # print("-------------DEBUG--------------------------------------")
+
     temp_row = ["", "", "", "", "", "", "", "", "", "a"]
     Rows = []
-    print(Rows)
-    Rows.append(["aa","bb","cc"])
-    print(Rows)
+    print("Rows is: ",Rows)
+    # Rows.append(["aa","bb","cc"])
+    # print(Rows)
 
     def clear_temp_row():
         temp_row = ["", "", "", "", "", "", "", "", "", ""]
         return temp_row
 
-    def empty_temp_row()
+    def empty_temp_row():
         temp_row = []
         return temp_row
 
 
+    temp_row = empty_temp_row()
+    temp_row.append("")
+    temp_row.append("")
+    for i in range(len(Type)):
+        temp_row.append(Type[i])
+    print(temp_row)
+    Rows.append(temp_row)
+    print("Rows is: ", Rows)
 
 
 
-    my_csv = open('processed_data.csv','w')
+
+    my_csv = open('processed_data.csv','w', newline='')
     writer = csv.writer(my_csv)
-
-    #   Create the titles (foreigner local total
-    for i  in range(len(Type)):
-        temp_row[i+1] = Type[i]
-    # print(temp_row)
-    writer.writerow(temp_row)
-
-    temp_row = clear_temp_row()
-    temp_row[0] = in_tsv[0][9]
-    # print(temp_row)
-    writer.writerow(temp_row)
-
-    print("\n-----------------")
+    writer.writerow(Rows[0])
+    writer.writerow(Rows[0])
+    #
+    # #   Create the titles (foreigner local total
+    # for i  in range(len(Type)):
+    #     temp_row[i+1] = Type[i]
+    # # print(temp_row)
+    # writer.writerow(temp_row)
+    #
+    # temp_row = clear_temp_row()
+    # temp_row[0] = in_tsv[0][9]
+    # # print(temp_row)
+    # writer.writerow(temp_row)
+    #
+    # print("\n-----------------")
 
 
     # for i in Column_list_years:
