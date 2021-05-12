@@ -9,8 +9,7 @@ from tkinter import *
 def directory_change():
 
 
-    root = tk.Tk()
-    root.withdraw()
+
 
     current_directory = os.getcwd()
 
