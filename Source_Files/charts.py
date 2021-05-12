@@ -12,13 +12,14 @@ def draw_charts():
 
     # plt.plot(xpoints, ypoints)
 
-    y = np.array([35, 25, 25, 15])
-    mylabels = ["Apples", "Bananas", "Cherries", "Dates"]
+    y = np.array([35, 25, 25, 12])
+    mylabels = ["Apples\n 35%", "Bananas", "Cherries", "Dates"]
     myexplode = [0.2, 0, 0, 0]
     mycolors = ["red", "yellow", "pink", "black"]
 
-    plt.pie(y,labels = mylabels, startangle = 90, explode = myexplode,colors = mycolors)
-    plt.legend()
+    plt.pie(y,labels = mylabels, startangle = 90,colors = mycolors)
+    #                                              (from left , from bottom)
+    plt.legend(loc='upper left')
     plt.show()
 
     # # Three lines to make our compiler able to draw:

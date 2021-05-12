@@ -27,4 +27,4 @@ draw_charts()
 
 
 
-mb.showinfo("Job done", "Great Success!\t\t")
+# mb.showinfo("Job done", "Great Success!\t\t")
