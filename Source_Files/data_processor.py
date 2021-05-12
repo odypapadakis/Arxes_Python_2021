@@ -60,7 +60,7 @@ def data_processor():
 
     temp_row = ["", "", "", "", "", "", "", "", "", "a"]
     Rows = []
-    print("Rows is: ",Rows)
+    # print("Rows is: ",Rows)
     # Rows.append(["aa","bb","cc"])
     # print(Rows)
 
@@ -72,7 +72,7 @@ def data_processor():
         temp_row = []
         return temp_row
 
-    #  Create the titles Row
+    #  Create the titles Row --------------
     temp_row = empty_temp_row()
     for i in range(2):
         temp_row.append("")
@@ -80,11 +80,11 @@ def data_processor():
     for i in range(len(Type)):
         temp_row.append(Type[i])
 
-    print(temp_row)
+    # print(temp_row)
     Rows.append(temp_row)
-    print("Rows is: ", Rows)
+    # print("Rows is: ", Rows)
 
-    #  Create the year row
+    #  Create the year row --------------
     temp_row = empty_temp_row()
     for i in Column_list_years:
         # Create a row that contains the year
@@ -92,19 +92,22 @@ def data_processor():
         Rows.append(temp_row)
         temp_row = empty_temp_row()
 
-        # For each year
-        for i in range(2):
-            temp_row.append("")
+
+        temp_row.append("")
+        temp_row.append("Greece")
         for j in Row_list_GR:
             temp_row.append(in_tsv[j][i])
-            Rows.append(temp_row)
+        Rows.append(temp_row)
+        temp_row = empty_temp_row()
+
+        temp_row.append("")
+        temp_row.append("Spain")
+        for j in Row_list_ES:
+            temp_row.append(in_tsv[j][i])
+        Rows.append(temp_row)
         temp_row = empty_temp_row()
 
 
-
-
-    for i in range(len(Rows)):
-        print(Rows[i])
 
 
 

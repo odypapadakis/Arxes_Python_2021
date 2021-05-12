@@ -1,6 +1,7 @@
 # This Python files Downloads a file from eurostat.
 # It also extracts the file from the gzip.
 #  https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/tin00175.tsv.gz
+#  https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/tin00174.tsv.gz
 import tkinter as tk
 from tkinter import messagebox as mb
 import gzip
@@ -8,9 +9,9 @@ import requests
 from os import path
 
 
-def downloader():
+def downloader(url,title):
 
-    url = "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/tin00175.tsv.gz"
+    # url = "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/tin00175.tsv.gz"
 
     try:
         # response =
@@ -28,7 +29,7 @@ def downloader():
     # Extract the gz to memory
     extracted_data = gzip.decompress(gz_data.content)
 
-    filename = "Data.tsv"
+    filename = "Data_"+title+".tsv"
 
     root = tk.Tk()
     root.withdraw()
