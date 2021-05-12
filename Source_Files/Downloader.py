@@ -1,6 +1,6 @@
-# This file contains the code for downloading the csv files.
-
+# This Python files Downloads a file from eurostat.
 #  https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/tin00175.tsv.gz
+
 import tkinter as tk
 from tkinter import filedialog
 from tkinter import messagebox as mb

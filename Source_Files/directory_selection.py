@@ -17,7 +17,7 @@ def directory_change():
 
     current_directory = os.getcwd()
 
-    dir_change = mb.askquestion("Change directory ?", "Current directory is  " + str(current_directory) )
+    dir_change = mb.askquestion("Directory selection", "Current directory is :\n" + str(current_directory) + "\nChange Directory ?" )
 
     if dir_change == 'yes':
         requested_directory = tk.filedialog.askdirectory()
@@ -26,7 +26,8 @@ def directory_change():
         else:
             mb.showerror("Error", "No directory selected\n " + "Exiting")
             exit(0)
-
+    else:
+        pass
 
     # elif (dir_change == "no") :
     #     pass
