@@ -1,7 +1,9 @@
 # This Python files Downloads a file from eurostat.
 # It also extracts the file from the gzip.
+# And saves it to disk
 #  https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/tin00175.tsv.gz
 #  https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/tin00174.tsv.gz
+
 import tkinter as tk
 from tkinter import messagebox as mb
 import gzip
@@ -14,7 +16,6 @@ def downloader(url,title):
     # url = "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/tin00175.tsv.gz"
 
     try:
-        # response =
         requests.get(url, timeout=9.00)   # Expect a response within 9 seconds
     except Exception:
         # print("ERROR! \n Unable to reach Website", url)
@@ -23,7 +24,7 @@ def downloader(url,title):
         mb.showerror("Downloader Error", "URL unreachable.\t\t\n " + "Exiting")
         exit(0)
 
-    # Download the content of the gz to memory
+    # Download the gz to memory
     gz_data = requests.get(url, allow_redirects=True)
 
     # Extract the gz to memory
@@ -40,7 +41,7 @@ def downloader(url,title):
             mb.showinfo("No Changes made", " Exiting\t\t")
             exit(0)
 
-    # Write the data to disk, in the file named filename
+    # Write the data to disk
     f = open(filename, "wb")
     f.write(extracted_data)
     f.close()
