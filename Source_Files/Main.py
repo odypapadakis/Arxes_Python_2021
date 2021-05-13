@@ -7,15 +7,13 @@ from charts import *
 import tkinter as tk
 from tkinter import messagebox as mb
 
-
-
-
+# The list below contains the url for each file we want to download, and a name to be appended to the file
 URL_list =[
     ["https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/tin00175.tsv.gz","Nights"]
     ,
     ["https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/tin00174.tsv.gz","Arrivals"]
     ]
-print("aaaaaaaaaaaaaaaaa")
+
 
 # Initialize tkInter
 root = tk.Tk()
@@ -25,15 +23,21 @@ root.iconbitmap("../Images/favicon.ico")
 root.title("Ody's Downloader")
 root.geometry("600x300+650+400")  # Width x Height + Padding left + Padding top
 
+
+
+# Where should I put the downloads ?
 directory_change()
 
 
 for i in range(len(URL_list)):
     downloader(URL_list[i][0],URL_list[i][1])
 
+data_processor()
+
 # db_stuff()
+
 # draw_charts()
-# data_processor()
+
 
 
 mb.showinfo("Job done", "Great Success!\t\t")
