@@ -1,6 +1,7 @@
-# This Python files Downloads a file from eurostat.
-# It also extracts the file from the gzip.
-# And saves it to disk
+# This Python script
+# Downloads a compressed file from eurostat,
+# extracts the file from the gzip
+# and saves it to disk.
 #  https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/tin00175.tsv.gz
 #  https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/tin00174.tsv.gz
 
@@ -11,7 +12,7 @@ import requests
 from os import path
 
 
-def downloader(url,title):
+def downloader(url, title):
 
     # url = "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/tin00175.tsv.gz"
 
