@@ -8,10 +8,18 @@ import tkinter as tk
 from tkinter import messagebox as mb
 
 # The list below contains the url for each file we want to download, and a name to be appended to the file
-URL_list =[
-    ["https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/tin00175.tsv.gz","Nights"]
-    ,
-    ["https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/tin00174.tsv.gz","Arrivals"]
+URL_list = [
+        [
+            "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/tin00175.tsv.gz"
+            ,
+            "Nights"
+        ]
+        ,
+        [
+            "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/tin00174.tsv.gz"
+            ,
+            "Arrivals"
+        ]
     ]
 
 
@@ -20,19 +28,23 @@ root = tk.Tk()
 # root.withdraw()
 
 root.iconbitmap("../Images/favicon.ico")
-root.title("Ody's Downloader")
+root.title("Αρχές Γλωσσών Python 2021")
 root.geometry("600x300+650+400")  # Width x Height + Padding left + Padding top
 
 
 
-# Where should I put the downloads ?
+# Ask for a location to download the data
 directory_change()
 
-
+dl_files = []
+#  Feed the downloader with: 1)the url for each file 2)a string to append to each file
 for i in range(len(URL_list)):
-    downloader(URL_list[i][0],URL_list[i][1])
+    dl_files.append (downloader(URL_list[i][0],URL_list[i][1]))
 
-data_processor()
+
+print("-->",dl_files)
+
+# data_processor()
 
 # db_stuff()
 

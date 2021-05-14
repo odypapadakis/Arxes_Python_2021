@@ -18,7 +18,7 @@ def downloader(url, title):
 
     try:
         requests.get(url, timeout=9.00)   # Expect a response within 9 seconds
-    except Exception:
+    except requests.exceptions:
         # print("ERROR! \n Unable to reach Website", url)
         # print(a_ex)                         # Return the error type
         # exit(0)
@@ -31,18 +31,27 @@ def downloader(url, title):
     # Extract the gz to memory
     extracted_data = gzip.decompress(gz_file.content)
 
+    #  Create a title for the downloaded file based on the string the function received
     filename = "Data_"+title+".tsv"
 
+    # tkinter stuff
     root = tk.Tk()
     root.withdraw()
 
+    # Check if files with the same name exists. If it does, ask to overwrite or quit.
     if (path.isfile(filename)):
         overwrite = mb.askquestion("File already exists", "Overwrite --> " + filename + " <-- ?? ")
         if (overwrite == "no"):
             mb.showinfo("No Changes made", " Exiting\t\t")
             exit(0)
 
-    # Write the data to the disk
-    f = open(filename, "wb")
-    f.write(extracted_data)
-    f.close()
+    try:
+        # Write the files to disk
+        f = open(filename, "wb")
+        f.write(extracted_data)
+        f.close()
+    except IOError as ex_IO:
+        mb.showinfo(" Error writing file:", "File: \n" + filename + "\n Error: " + str(ex_IO))
+        exit(0)
+
+    return filename
