@@ -25,10 +25,10 @@ def downloader(url,title):
         exit(0)
 
     # Download the gz to memory
-    gz_data = requests.get(url, allow_redirects=True)
+    gz_file = requests.get(url, allow_redirects=True)
 
     # Extract the gz to memory
-    extracted_data = gzip.decompress(gz_data.content)
+    extracted_data = gzip.decompress(gz_file.content)
 
     filename = "Data_"+title+".tsv"
 
