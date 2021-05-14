@@ -42,7 +42,7 @@ def downloader(url, title):
             mb.showinfo("No Changes made", " Exiting\t\t")
             exit(0)
 
-    # Write the data to disk
+    # Write the data to the disk
     f = open(filename, "wb")
     f.write(extracted_data)
     f.close()
