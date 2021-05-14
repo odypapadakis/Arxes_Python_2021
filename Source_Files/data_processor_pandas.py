@@ -19,11 +19,18 @@ def data_processor_pandas(filename):
 
 
     print(df)
+    print("---------------")
+    print(df.loc[11])
+
+
+
+
+
     # print(df.columns)
     # print(df['c_resid,unit,nace_r2,geo\\time'].str.contains(pat='ES|EL', regex=True, axis = 1))
 
-    df2 = df.loc[df.columns[df.columns.str.contains('2019|2018')],axis = 1]
-    print(df)
+    # df2 = df.loc[df.columns[df.columns.str.contains('2019|2018')],axis = 1]
+    # print(df)
     # df =
     # print("BBBBBBBBB")
     # df1.drop(list(df1.filter(regex = 'not(2016|2017|2018|2019)')), axis = 1, inplace = True)
