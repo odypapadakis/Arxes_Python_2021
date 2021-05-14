@@ -1,3 +1,7 @@
+ # This  python program create the required graphs
+ # It uses the previously downloaded data.ubl
+
+
 import matplotlib
 import matplotlib
 import matplotlib.pyplot as plt
