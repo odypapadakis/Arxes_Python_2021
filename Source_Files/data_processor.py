@@ -1,189 +1,73 @@
+import pandas as pd
+import re
+from os import path
+import tkinter as tk
+from tkinter import messagebox as mb
 
-import csv
+def data_processor(filename):
+    # filename = "Data_Arrivals.tsv"
 
-
-def data_processor():
-
-    f = open("Data.tsv", 'rt')
-
-    in_tsv = csv.reader(f, delimiter="\t")
-
-    # Make it into a list
-    in_tsv = list(in_tsv)
-
-    #         [ROW][COL]
-    # print(in_tsv[12][9])
-    # book = xlrd.open_workbook("Data.tsv")
-
-    year_begin = 2016
-    year_end = 2019
-
-    if(year_begin < 2008):
-        print("ERROR, earliest data is 2008")
-        exit(1)
-
-    if(year_end > 2019):
-        print("ERROR, latest data is 2019")
-        exit(1)
-
-    # print(2+year_begin - 2008)
-    # print(year_end - 2008)
-    # print("----------------")
-    # for i in range( (2+year_begin - 2008 ), (year_end+2 - 2008 )  ):
-    #     # print("i is ",i)
-    #     num = int(in_tsv[11][i])
-    #     print( format(num, ',')  )
-    #     # print()
-    #            FOR,LOC,TOTAL
-    Row_list_GR = [11,51,91]
-    Row_list_ES = [12,52,92]
-    Type = ["FOREIGNERS","LOCALS","TOTAL"]
-
-    Column_list_years = [9,10,11,12]
-
-    # print("-----------DEBUG--------------------------------------")
-    # #           [ROW][COL]
-    # for i in Column_list_years:
-    #     print(in_tsv[0][i])
-    #
-    # print("-----------------")
-    #
-    # for j in Row_list_GR:
-    #     print(in_tsv[j][0])
-    #
-    # print("-----------------")
-    #
-    # for j in Row_list_ES:
-    #     print\
-    #         (in_tsv[j][0])
-    # print("-------------DEBUG--------------------------------------")
-
-    temp_row = ["", "", "", "", "", "", "", "", "", "a"]
-    Rows = []
-    # print("Rows is: ",Rows)
-    # Rows.append(["aa","bb","cc"])
-    # print(Rows)
-
-    def clear_temp_row():
-        temp_row = ["", "", "", "", "", "", "", "", "", ""]
-        return temp_row
-
-    def empty_temp_row():
-        temp_row = []
-        return temp_row
-
-    #  Create the titles Row --------------
-    temp_row = empty_temp_row()
-    for i in range(2):
-        temp_row.append("")
-    # temp_row.append("")
-    for i in range(len(Type)):
-        temp_row.append(Type[i])
-
-    # print(temp_row)
-    Rows.append(temp_row)
-    # print("Rows is: ", Rows)
-
-    #  Create the year row --------------
-    temp_row = empty_temp_row()
-    for i in Column_list_years:
-        # Create a row that contains the year
-        temp_row.append(in_tsv[0][i])
-        Rows.append(temp_row)
-        temp_row = empty_temp_row()
+    # Select years
+    start_year = 2016
+    end_year = 2019
 
 
-        temp_row.append("")
-        temp_row.append("Greece")
-        for j in Row_list_GR:
-            temp_row.append(in_tsv[j][i])
-        Rows.append(temp_row)
-        temp_row = empty_temp_row()
-
-        temp_row.append("")
-        temp_row.append("Spain")
-        for j in Row_list_ES:
-            temp_row.append(in_tsv[j][i])
-        Rows.append(temp_row)
-        temp_row = empty_temp_row()
+    selected_years =  str(start_year)
+    for i in range(start_year+1 , end_year +1):
+        selected_years = selected_years +"|" + str(i)
 
 
 
+    selected_countries = "EL|ES"
 
+    # The regular expressions for the selections are completed
+    selected_countries_RE = selected_countries + "\Z"
+    selected_years_RE = re.compile(selected_years + "|COUNTRY")
 
-    my_csv = open('processed_data.csv','w', newline='')
-    writer = csv.writer(my_csv)
-    for i in range(len(Rows)):
-        writer.writerow(Rows[i])
+    # load the tsv into a pandas dataframe
+    df = pd.read_table(filename)
 
-    # writer.writerow(Rows[0])
-    #
-    # #   Create the titles (foreigner local total
-    # for i  in range(len(Type)):
-    #     temp_row[i+1] = Type[i]
-    # # print(temp_row)
-    # writer.writerow(temp_row)
-    #
-    # temp_row = clear_temp_row()
-    # temp_row[0] = in_tsv[0][9]
-    # # print(temp_row)
-    # writer.writerow(temp_row)
-    #
-    # print("\n-----------------")
+    # Change the first column name, because it has silly characters and causes problems
+    df = df.rename(columns={df.columns[0]: 'COUNTRY'})
 
+    #In the dataframe df, return true if the RE:Selected_countries_RE is true
+    mask = (df['COUNTRY'].str.contains(selected_countries_RE,regex = True))
 
-    # for i in Column_list_years:
-    #     #   Print the year
-    #     print(in_tsv[0][i])
-    #
-    #     print("Greece")
-    #     k = 0
-    #     for j in Row_list_GR:
-    #         # print(in_tsv[j][0], end=" ")
-    #         print(Type[k],end=" ")
-    #         print(in_tsv[j][i],end =" ")
-    #         k = k+1
-    #
-    #     print("\n")
-    #
-    #     print("Spain")
-    #     k = 0
-    #     for j in Row_list_ES:
-    #         # print(in_tsv[j][0], end=" ")
-    #         print(Type[k], end=" ")
-    #         print(in_tsv[j][i], end=" ")
-    #
-    #     print("\n-----------------")
+    # Apply the mask to the dataframe to filter
+    df = df[mask]
 
+    # Filter out the columns that do not match the selected years
+    df = df.filter(regex=selected_years_RE, axis=1)
 
+    # df.to_csv(filename, index=False)
+    # print(df)
 
+    size = len(filename)
+    # Slice string to remove last 3 characters from string
+    filename = filename[:size - 4]
 
+    filename  = filename + ".csv"
 
-    # k = 0
-    # print("Greece")
-    # for i in Row_list_GR:
-    #     print(Type[k])
-    #     k= k+1
-    #     for j in Column_list_years:
-    #         print(i,j)
+    # try:
+    #     f = open(filename, "wb")
+    # except  IOError as ex_IO:
+    #     mb.showinfo(" Error writing file:", "File: \n" + filename + "\n Error: " + str(ex_IO))
+    #     exit(0)
+    # print("OK to write")
 
+    if (path.isfile(filename)):
+        overwrite = mb.askquestion("File already exists", "Overwrite --> " + filename + " <-- ?? ")
+        if (overwrite == "no"):
+            mb.showinfo("No Changes made", " Exiting\t\t")
+            exit(0)
 
+    try:
+        # Write the files to disk
+        f = open(filename, "wb")
+        # f.write("dummy_data")
+        f.close()
+    except IOError as ex_IO:
+        mb.showinfo(" Error writing file:", "File: \n" + filename + "\n Error: " + str(ex_IO))
+        exit(0)
 
-    # for j in a_list:
-    #     # print(j)
-    #     if (j==11 or j == 12):
-    #         print("Foreigners")
-    #     if(j==51 or j == 52):
-    #         print("Residents")
-    #     if (j==91 or j == 92):
-    #         print("Total")
-    #
-    #     for i in range((1 + year_begin - 2008), (year_end + 2 - 2008)):
-    #         # print("i is ",i)
-    #         num = int(in_tsv[j][i])
-    #         print(format(num, ',') , "|",end =" ")
-    #     print("\n")
-
-
-    # years = [2016,2017,2018,2019]
-    # print(years)
+    df.to_csv(filename, encoding='utf-8', index=False)
