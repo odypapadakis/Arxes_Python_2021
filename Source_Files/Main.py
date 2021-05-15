@@ -31,24 +31,28 @@ root.iconbitmap("../Images/favicon.ico")
 root.title("Αρχές Γλωσσών Python 2021")
 root.geometry("600x300+650+400")  # Width x Height + Padding left + Padding top
 
-
-
 # Ask for a location to download the data
 # directory_change()
 
 dl_files = []
+cleaned_files = []
+
+
 
 # Feed the downloader with: 1)the url for each file 2)a string to append to each file
-# for i in range(len(URL_list)):
-#     dl_files.append (downloader(URL_list[i][0],URL_list[i][1]))
+for i in range(len(URL_list)):
+    dl_files.append (downloader(URL_list[i][0],URL_list[i][1]))
 
+# print(dl_files)
 
+for i in range(len(dl_files)):
+    cleaned_files =  data_processor(dl_files[i])
 
-data_processor("Data_Arrivals.tsv")
-
+# data_processor("Data_Arrivals.tsv")
+# draw_charts()
 # db_stuff()
 
-# draw_charts()
+
 
 
 
