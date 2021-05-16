@@ -1,39 +1,34 @@
- # This  python program create the required graphs
- # It uses the previously downloaded data.ubl
 
-
-import matplotlib
-import matplotlib
 import matplotlib.pyplot as plt
 import numpy as np
 
+ax = plt.subplot()
 
-def draw_charts():
-    print(matplotlib.__version__)
+ax.set_title('Nights Spent at tourist accommodation establishments\n' + ' GREECE')
+ax.set_ylabel('People')
+# The values to be plotted are stored below
+years = ['2016', '2017', '2018', '2019']
+vis_foreign = [5, 10, 15, 20]
+vis_total = [25, 32, 34, 45]
 
-    # xpoints = np.array([0, 6])
-    # ypoints = np.array([0, 250])
+# Return evenly spaced values based on the length of the list supplied
+x = np.arange(len(years))  # the label locations
+width = 0.2  # the width of the bars
 
-    # plt.plot(xpoints, ypoints)
+# The two bars are created
+rect1 = ax.bar(x - width/2, vis_foreign, width, label='Non Residents')
+rect2 = ax.bar(x + width/2, vis_total, width, label='Total')
 
-    y = np.array([35, 25, 25, 12])
-    mylabels = ["Apples\n 35%", "Bananas", "Cherries", "Dates"]
-    myexplode = [0.2, 0, 0, 0]
-    mycolors = ["red", "yellow", "pink", "black"]
+# Ads the label on top of each bar
+ax.bar_label(rect1, padding=3)
+ax.bar_label(rect2, padding=3)
 
-    plt.pie(y,labels = mylabels, startangle = 90,colors = mycolors)
-    #                                              (from left , from bottom)
-    plt.legend(loc='upper left')
-    plt.show()
+# Where on the graph to place X axis ticks
+ax.set_xticks(x)
+# Source for labels to attach to each tick
+ax.set_xticklabels(years)
 
-    # # Three lines to make our compiler able to draw:
-    # import sys
-    #
-    # matplotlib.use('Agg')
-    #
-    # y = np.array([35, 25, 25, 15])
-    #
-    # plt.pie(y)
-    # plt.show()
-    # plt.savefig(sys.stdout.buffer)
-    # sys.stdout.flush()
+# Show a legend
+ax.legend()
+
+plt.show()

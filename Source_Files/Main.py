@@ -9,7 +9,7 @@ from directory_selection import *
 from downloader import *
 from data_processor import *
 from db_store import *
-from charts import *
+from ZZ_charts import *
 
 import tkinter as tk
 from tkinter import messagebox as mb
@@ -39,11 +39,11 @@ root.iconbitmap("../Images/favicon.ico")
 root.title("Αρχές Γλωσσών Python 2021")
 root.geometry("600x300+650+400")  # Width x Height + Padding left + Padding top
 
-# Ask for a location to download the data
+# Ask for a location to download the data into
 # directory_change()
 
 # List of downloaded files, will be fed to the downloader
-# Holds lists with 2 items, filename and name
+# Holds lists with 2 items, filename  and name
 dl_files = []
 
 # Holds datafranes of cleaned files and names. Will be fed to the chart creator
