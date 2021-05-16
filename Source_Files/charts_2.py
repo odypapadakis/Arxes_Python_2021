@@ -119,12 +119,12 @@ x = np.arange(len(years))  # the label locations
 width = 0.2  # the width of the bars
 
 fig, ax = plt.subplots()
-rects1 = ax.bar(x - width/2, vis_foreign, width, label='Foreigners')
+rects1 = ax.bar(x - width/2, vis_foreign, width, label='Non Residents')
 rects2 = ax.bar(x + width/2, vis_total, width, label='Total')
 
 # Add some text for labels, title and custom x-axis tick labels, etc.
 ax.set_ylabel('People')
-ax.set_title('Nigths Spent at tourist accomodation establishments\n GREECE')
+ax.set_title('Nigths Spent at tourist accomodation establishments\n'+ ' GREECE')
 ax.set_xticks(x)
 ax.set_xticklabels(years)
 ax.legend()
