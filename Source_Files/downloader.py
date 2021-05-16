@@ -54,4 +54,4 @@ def downloader(url, title):
         mb.showinfo(" Error writing file:", "File: \n" + filename + "\n Error: " + str(ex_IO))
         exit(0)
 
-    return filename
+    return (filename,title)

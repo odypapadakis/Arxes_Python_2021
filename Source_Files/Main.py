@@ -34,7 +34,11 @@ root.geometry("600x300+650+400")  # Width x Height + Padding left + Padding top
 # Ask for a location to download the data
 # directory_change()
 
+# List of downloaded files, will be fed to the downloader
+# Holds lists with 2 items, filename and name
 dl_files = []
+
+# Holds datafranes of cleaned files and names. Will be fed to the chart creator
 cleaned_files = []
 
 
@@ -46,8 +50,9 @@ for i in range(len(URL_list)):
 # print(dl_files)
 
 for i in range(len(dl_files)):
-    cleaned_files =  data_processor(dl_files[i])
+    cleaned_files.append(data_processor(dl_files[i][0],dl_files[i][1]))
 
+print(cleaned_files)
 # data_processor("Data_Arrivals.tsv")
 # draw_charts()
 # db_stuff()
