@@ -54,8 +54,8 @@ dl_files = []
 cleaned_files = []
 
 #------------------  DEBUG---------------
-dl_files.append(['Data_Arrivals.tsv','Arrivals',"Arrivals of residents/non-residents at tourist accommodation establishments"])
-dl_files.append(['Data_Nights.tsv','Nights',"Nights spent at tourist accommodation establishments by residents/non-residents"])
+dl_files.append(['Data_Arrivals.tsv','Arrivals','Arrivals of residents/non-residents at tourist accommodation establishments'])
+dl_files.append(['Data_Nights.tsv','Nights','Nights spent at tourist accommodation establishments by residents/non-residents'])
 
 print("-------  DOWNLOADING -------")
 # # Feed the downloader with: 1)the url for each file 2)a string to append to each file
@@ -68,18 +68,22 @@ print("-------  DOWNLOADING -------")
 
 print("-------  PROCESSING DATA    -------")
 for i in range(len(dl_files)):
-    cleaned_files.append(data_processor(dl_files[i][0],dl_files[i][1],dl_files[i][2]))
+    cleaned_files.append( data_processor (dl_files[i][0],dl_files[i][1],dl_files[i][2]) )
 
-
+# for i in range(len(cleaned_files)):
+#     print("===================== cleaned_files[",i,"] =====================\n",cleaned_files[i])
+#     for j in range(len(cleaned_files[i])):
+#         print("==== cleaned_files[", i, "] [",j, "] ====\n", cleaned_files[i][j])
+# exit(0)
 
 print("-------  MAKING CHARTS    -------")
 # print(cleaned_files)
 # Pass the cleaned dataframe and a title to the chart maker
-for i in range(len(cleaned_files)):
-    make_charts(cleaned_files[i])
+# for i in range(len(cleaned_files)):
+#     make_charts(cleaned_files[i])
 
 # db_stuff()
-
+# print(cleaned_files)
 make_charts(cleaned_files)
 
 
