@@ -7,7 +7,7 @@ import numpy as np
 import matplotlib.ticker as mtick
 
 def make_charts(cleaned_file):
-    print("**************** INSIDE CHARTS *******************************")
+    # print("**************** INSIDE CHARTS *******************************")
 
     cleaned_file = cleaned_file[0]
     # print(cleaned_file)
@@ -22,8 +22,7 @@ def make_charts(cleaned_file):
     df = cleaned_file[0]
     title = cleaned_file[2]
     ax = plt.subplot()
-    ax.set_title(title + "\n" + ' GREECE')
-
+    ax.set_title(title + "\n" + ' GREECE',fontsize=14)
 
     years = df.columns.tolist()
     years.pop(0)
@@ -38,9 +37,8 @@ def make_charts(cleaned_file):
     data_foreign.pop(0)
     data_foreign = [int(i) for i in data_foreign]
 
-    print(data_foreign)
+    # print(data_foreign)
     # print(type(data_foreign))
-
 
     data_total = df1[(df1['COUNTRY'].str.match('TOTAL'))]
     data_total = data_total.values.tolist()
@@ -48,10 +46,8 @@ def make_charts(cleaned_file):
     data_total.pop(0)
     data_total = [int(i) for i in data_total]
 
-    print(data_total)
+    # print(data_total)
     # print(type(data_total))
-
-
 
     # data_foreign = [5, 10, 15, 20]
     # data_total = [25, 32, 34, 45]
@@ -70,7 +66,10 @@ def make_charts(cleaned_file):
     rect2 = ax.bar(x + width / 2, data_total, width, label='Total')
 
     # Ads the label on top of each bar
-    ax.bar_label(rect1, padding=2,fmt = '%d')
+    asdf = mtick.StrMethodFormatter("{x:,.0f}")
+    # ax.get_yaxis().set_major_formatter(
+    #     mtick.FuncFormatter(lambda x, p: format(int(x), ',')))
+    ax.bar_label(rect1, padding=2,fmt = '%d:,')
     ax.bar_label(rect2, padding=2,fmt = '%d')
 
     # Where on the graph to place X axis ticks
@@ -83,9 +82,19 @@ def make_charts(cleaned_file):
     ax.set_ylabel('People',fontsize=16)
     ax.set_xlabel('YEAR', fontsize=16)
 
-    fmt = '%d'
-    tick = mtick.FormatStrFormatter(fmt)
-    ax.get_yaxis().set_major_formatter(tick)
+    # fmt = '%d'
+    # fmt2 = '{x/1000} asdf'
+    # tick = mtick.FormatStrFormatter(fmt)
+    # ax.get_yaxis().set_major_formatter(tick)
+
+    # StrMethod formatter
+    # setup(axs1[1], title="StrMethodFormatter('{x:.3f}')")
+    ax.yaxis.set_major_formatter(mtick.StrMethodFormatter("{x:,.0f}"))
+    # ax.rect1.set_major_formatter(mtick.StrMethodFormatter("{x:,.0f}"))
+
+
+
+    # ax.yaxis.set_major_formatter('{x} m')
 
     # Show a legend
     ax.legend()
