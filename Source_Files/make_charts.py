@@ -69,7 +69,9 @@ def make_charts(cleaned_file):
     asdf = mtick.StrMethodFormatter("{x:,.0f}")
     # ax.get_yaxis().set_major_formatter(
     #     mtick.FuncFormatter(lambda x, p: format(int(x), ',')))
-    ax.bar_label(rect1, padding=2,fmt = '%d:,')
+    # ax.bar_label(rect1, padding=2,fmt = '%d')
+    ax.bar_label(rect1, padding=2)
+    # ax.bar_label(hbars, labels=['±%.2f' % e for e in error],padding=8, color='b', fontsize=14)
     ax.bar_label(rect2, padding=2,fmt = '%d')
 
     # Where on the graph to place X axis ticks
