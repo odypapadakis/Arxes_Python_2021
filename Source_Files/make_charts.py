@@ -5,6 +5,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import matplotlib.ticker as mtick
+from matplotlib.ticker import FuncFormatter
 
 def make_charts(cleaned_file):
     # print("**************** INSIDE CHARTS *******************************")
@@ -70,7 +71,7 @@ def make_charts(cleaned_file):
     # ax.get_yaxis().set_major_formatter(
     #     mtick.FuncFormatter(lambda x, p: format(int(x), ',')))
     # ax.bar_label(rect1, padding=2,fmt = '%d')
-    ax.bar_label(rect1, padding=2)
+    ax.bar_label(rect1, padding=2,fmt = '%d')
     # ax.bar_label(hbars, labels=['±%.2f' % e for e in error],padding=8, color='b', fontsize=14)
     ax.bar_label(rect2, padding=2,fmt = '%d')
 
@@ -84,14 +85,21 @@ def make_charts(cleaned_file):
     ax.set_ylabel('People',fontsize=16)
     ax.set_xlabel('YEAR', fontsize=16)
 
-    # fmt = '%d'
-    # fmt2 = '{x/1000} asdf'
-    # tick = mtick.FormatStrFormatter(fmt)
-    # ax.get_yaxis().set_major_formatter(tick)
+    fmt = '%d'
+    fmt2 = 'num:,%d'
+    tick = mtick.FormatStrFormatter(fmt2)
+    # ax.get_yaxis().set_major_formatter(fmt)
+
+    def millions(x, pos):
+        'The two args are the value and tick position'
+        return '%1.1fM' % (x * 1e-6)
+    # https://stackoverflow.com/questions/40511476/how-to-properly-use-funcformatterfunc
+    formatter = FuncFormatter(millions)
+    ax.get_yaxis().set_major_formatter(formatter)
 
     # StrMethod formatter
     # setup(axs1[1], title="StrMethodFormatter('{x:.3f}')")
-    ax.yaxis.set_major_formatter(mtick.StrMethodFormatter("{x:,.0f}"))
+    # ax.yaxis.set_major_formatter(mtick.StrMethodFormatter("{x:,.0f}"))
     # ax.rect1.set_major_formatter(mtick.StrMethodFormatter("{x:,.0f}"))
 
 
