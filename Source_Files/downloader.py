@@ -15,7 +15,7 @@ from os import path
 def downloader(url, title):
 
     # url = "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/tin00175.tsv.gz"
-
+    print("Downloading" , title )
     try:
         requests.get(url, timeout=9.00)   # Expect a response within 9 seconds
     except requests.exceptions:
@@ -40,18 +40,18 @@ def downloader(url, title):
 
     # Check if files with the same name exists. If it does, ask to overwrite or quit.
     if (path.isfile(filename)):
-        overwrite = mb.askquestion("File already exists", "Overwrite --> " + filename + " <-- ?? ")
+        overwrite = mb.askquestion("File already exists", "Overwrite -> " + filename + " <- ?? ")
         if (overwrite == "no"):
-            mb.showinfo("No Changes made", " Exiting\t\t")
-            exit(0)
-
+            mb.showinfo("No Changes made ","File-> " + filename + "<- not saved \t\t\t")
+            # exit(0)
+            return None
     try:
         # Write the files to disk
         f = open(filename, "wb")
         f.write(extracted_data)
         f.close()
     except IOError as ex_IO:
-        mb.showinfo(" Error writing file:", "File: \n" + filename + "\n Error: " + str(ex_IO))
-        exit(0)
-
+        mb.showinfo(" Problem writing file:", filename + "\n Error: " + str(ex_IO))
+        # exit(0)
+        return None
     return (filename,title)

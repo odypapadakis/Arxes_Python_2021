@@ -6,7 +6,7 @@ from tkinter import messagebox as mb
 
 
 def data_processor(filename,title):
-    # print(filename)
+    print("Processing ", filename)
 
     # filename = "Data_Arrivals.tsv"
 
@@ -69,7 +69,7 @@ def data_processor(filename,title):
         f.close()
     except IOError as ex_IO:
         mb.showinfo(" Error writing file:", "File: \n" + filename_out + "\n Error: " + str(ex_IO))
-        exit(0)
+        return None
 
     # Create a csv with the cleared data frame
     df.to_csv(filename_out, encoding='utf-8', index=False)

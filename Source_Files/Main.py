@@ -50,18 +50,22 @@ dl_files = []
 cleaned_files = []
 
 #------------------  DEBUG---------------
-dl_files.append(['Data_Arrivals.tsv','Arrivals'])
-dl_files.append(['Data_Nights.tsv','Nights'])
+# dl_files.append(['Data_Arrivals.tsv','Arrivals'])
+# dl_files.append(['Data_Nights.tsv','Nights'])
 
-
+print(" ---- DOWNLOADING -------")
 # Feed the downloader with: 1)the url for each file 2)a string to append to each file
-# for i in range(len(URL_list)):
-#     dl_files.append (downloader(URL_list[i][0],URL_list[i][1]))
-#
+for i in range(len(URL_list)):
+    temp = downloader(URL_list[i][0],URL_list[i][1])
+    if temp != None :
+        dl_files.append (temp)
 
+print(dl_files)
 
+print(" ---- PROCESSING DATA  -------")
 for i in range(len(dl_files)):
     cleaned_files.append(data_processor(dl_files[i][0],dl_files[i][1]))
+
 
 
 
