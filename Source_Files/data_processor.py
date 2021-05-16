@@ -56,7 +56,7 @@ def data_processor(filename,title):
     filename_out = filename[:size - 4]
     filename_out = filename_out + ".csv"
 
-    # Check for file existence and askt to write / overwrite
+    # Check for file existence and ask to write / overwrite
     if path.isfile(filename_out):
         overwrite = mb.askquestion("File already exists", "Overwrite --> " + filename_out + " <-- ?? ")
         if overwrite == "no":
