@@ -5,7 +5,7 @@ from os import remove
 from tkinter import messagebox as mb
 
 
-def data_processor(filename,title):
+def data_processor(filename,title,original_name):
     print("Processing ", filename)
 
     # filename = "Data_Arrivals.tsv"
@@ -82,4 +82,4 @@ def data_processor(filename,title):
         except IOError as ex_IO:
             mb.showinfo(" Error Deleting file:", "File: \n" + filename + "\n Error: " + str(ex_IO))
 
-    return df,title
+    return df,title,original_name

@@ -12,7 +12,7 @@ import requests
 from os import path
 
 
-def downloader(url, title):
+def downloader(url, title,original_name):
 
     # url = "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/tin00175.tsv.gz"
     print("Downloading" , title )
@@ -54,4 +54,4 @@ def downloader(url, title):
         mb.showinfo(" Problem writing file:", filename + "\n Error: " + str(ex_IO))
         # exit(0)
         return None
-    return (filename,title)
+    return (filename,title,original_name)
