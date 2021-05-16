@@ -16,18 +16,18 @@ from tkinter import messagebox as mb
 
 # The list below contains the url for each file we want to download, and a name to be appended to the file
 URL_list = [
-        [
-            "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/tin00175.tsv.gz"
+            [
+                "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/tin00175.tsv.gz"
+                ,
+                "Nights"
+            ]
             ,
-            "Nights"
-        ]
-        ,
-        [
-            "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/tin00174.tsv.gz"
-            ,
-            "Arrivals"
-        ]
-    ]
+            [
+                "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/tin00174.tsv.gz"
+                ,
+                "Arrivals"
+            ]
+           ]
 
 
 # Initialize tkInter
@@ -49,20 +49,25 @@ dl_files = []
 # Holds datafranes of cleaned files and names. Will be fed to the chart creator
 cleaned_files = []
 
+#------------------  DEBUG---------------
+dl_files.append(['Data_Arrivals.tsv','Arrivals'])
+dl_files.append(['Data_Nights.tsv','Nights'])
 
 
 # Feed the downloader with: 1)the url for each file 2)a string to append to each file
-for i in range(len(URL_list)):
-    dl_files.append (downloader(URL_list[i][0],URL_list[i][1]))
-
-# print(dl_files)
+# for i in range(len(URL_list)):
+#     dl_files.append (downloader(URL_list[i][0],URL_list[i][1]))
+#
 
 for i in range(len(dl_files)):
     cleaned_files.append(data_processor(dl_files[i][0],dl_files[i][1]))
 
-print(cleaned_files)
-# data_processor("Data_Arrivals.tsv")
-# draw_charts()
+
+
+# print(cleaned_files)
+
+# draw_charts(cleaned_files)
+
 # db_stuff()
 
 
