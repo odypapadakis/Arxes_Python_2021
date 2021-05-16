@@ -1,3 +1,10 @@
+# This is a program that downloads data from eurostat.
+# It cleans it up
+# Saves it as csv files
+# Creates some charts
+# And stores it into a mysql database
+# Created by Odysseas papadakis
+
 from directory_selection import *
 from downloader import *
 from data_processor import *
@@ -27,6 +34,7 @@ URL_list = [
 root = tk.Tk()
 # root.withdraw()
 
+# Tkinter window miscellaneous stuff
 root.iconbitmap("../Images/favicon.ico")
 root.title("Αρχές Γλωσσών Python 2021")
 root.geometry("600x300+650+400")  # Width x Height + Padding left + Padding top
