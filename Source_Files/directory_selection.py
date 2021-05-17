@@ -1,4 +1,4 @@
-# This program asks the user to specify a directory to store the files to be downloaded.
+# This Function asks the user to specify a directory to store the files to be downloaded.
 
 import os
 
@@ -10,6 +10,7 @@ from tkinter import messagebox as mb
 
 def directory_change():
 
+    # Get the current directory
     current_directory = os.getcwd()
 
     # Do you want to change directory ?

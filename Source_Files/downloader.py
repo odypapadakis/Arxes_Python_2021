@@ -1,4 +1,4 @@
-# This Python script
+# This Python function
 # Downloads a compressed file from eurostat,
 # extracts the file from the gzip
 # and saves it to disk.
@@ -54,4 +54,5 @@ def downloader(url, title,original_name):
         mb.showinfo(" Problem writing file:", filename + "\n Error: " + str(ex_IO))
         # exit(0)
         return None
-    return (filename,title,original_name)
+
+    return (filename, title, original_name)
