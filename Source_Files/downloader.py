@@ -2,6 +2,7 @@
 # Downloads a compressed file from eurostat,
 # extracts the file from the gzip
 # and saves it to disk.
+#
 #  https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/tin00175.tsv.gz
 #  https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/tin00174.tsv.gz
 
@@ -10,6 +11,11 @@ from tkinter import messagebox as mb
 import gzip
 import requests
 from os import path
+
+#      The inputs are:
+#       ur: The url that has the file we need
+#       title: A user decided string, that will help identify the downloaded data
+#       original_name:
 
 
 def downloader(url, title,original_name):
