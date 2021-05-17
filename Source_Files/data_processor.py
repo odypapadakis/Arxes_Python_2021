@@ -5,7 +5,7 @@ from os import remove
 from tkinter import messagebox as mb
 
 
-def data_processor(filename,title,original_name):
+def data_processor(filename, title, original_name):
     print("Processing ", filename)
 
     # filename = "Data_Arrivals.tsv"
@@ -18,12 +18,13 @@ def data_processor(filename,title,original_name):
     selected_countries = "EL|ES"
 
     # Slect visitor type to keep data for. options are (FOR|LOC|TOTAL)
-    visitor_type_RE= "FOR|TOTAL"
+    visitor_type_RE = "FOR|TOTAL"
 
     # Create the regular expression that holds the years to be kept in the dataframe
     selected_years = str(start_year)
     for i in range(start_year+1, end_year + 1):
         selected_years = selected_years + "|" + str(i)
+    # For example "2017|2018|2019"
 
     # Add the ends with character for the regex
     selected_countries_RE = selected_countries + "\Z"
@@ -82,4 +83,4 @@ def data_processor(filename,title,original_name):
         except IOError as ex_IO:
             mb.showinfo(" Error Deleting file:", "File: \n" + filename + "\n Error: " + str(ex_IO))
 
-    return df,title,original_name
+    return df, title, original_name
