@@ -10,8 +10,10 @@ from matplotlib.ticker import FuncFormatter
 def make_charts(cleaned_file):
     # print("**************** INSIDE CHARTS *******************************")
 
+
+
     cleaned_file = cleaned_file[0]
-    # print(cleaned_file)
+    print(cleaned_file)
     # print(type(cleaned_file[0]))
     # exit(0)
     # print("----------------------")
@@ -22,17 +24,29 @@ def make_charts(cleaned_file):
 
     df = cleaned_file[0]
     title = cleaned_file[2]
-    ax = plt.subplot()
-    ax.set_title(title + "\n" + ' GREECE',fontsize=14)
+    # ax = plt.subplot()
 
+
+
+    # Get the names of all the columns into a list
     years = df.columns.tolist()
+    # drop the first column  from the list, as it is a title for the first column
     years.pop(0)
 
-    # test = df.columns.tolist(1)
 
+    # test = df.columns.tolist(1)
+    # Keep only the rows that have the country column END with 'EL'
     df1 = df[(df['COUNTRY'].str.contains('EL', regex=True))]
 
+
+    # country_title =
+    ax.set_title(title + "\n" + ' GREECE', fontsize=14)
+
+
+
+    # Keep only the row that have the country column BEGIN with FOR
     data_foreign = df1[(df1['COUNTRY'].str.match('FOR'))]
+    # make the
     data_foreign = data_foreign.values.tolist()
     data_foreign = data_foreign[0]
     data_foreign.pop(0)
