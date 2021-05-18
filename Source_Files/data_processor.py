@@ -75,8 +75,8 @@ def data_processor(filename, title, original_name):
     # Create a csv with the cleared data frame
     df.to_csv(filename_out, encoding='utf-8', index=False)
 
-    keep_original_files = mb.askquestion("Do you want to keep " + filename + " ?",
-                                         "Selecting no will delete the above file\t\t")
+    keep_original_files = mb.askquestion("Keep Downloaded File ?",
+                                         "Select no to delete: " + filename + "\t\t")
     if keep_original_files == "no":
         try:
             remove(filename)

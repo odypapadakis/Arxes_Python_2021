@@ -60,20 +60,34 @@ def make_charts(cleaned_file):
     y = [*range(0,10)]
     # print(y)
     # exit(0)
-    width = 0.4  # the width of the bars
+    width = 0.3  # the width of the bars
 
     # The two bars are created
     rect1 = ax.bar(x - width / 2, data_foreign, width, label='Non Residents')
     rect2 = ax.bar(x + width / 2, data_total, width, label='Total')
 
+
+
+
+    ax.set_facecolor("gainsboro")
     # Ads the label on top of each bar
     asdf = mtick.StrMethodFormatter("{x:,.0f}")
     # ax.get_yaxis().set_major_formatter(
     #     mtick.FuncFormatter(lambda x, p: format(int(x), ',')))
     # ax.bar_label(rect1, padding=2,fmt = '%d')
-    ax.bar_label(rect1, padding=2,fmt = '%d')
+
+    def millions2(x, pos):
+        # 'The two args are the value and tick position'
+        return '%1.9fM' % (x * 1e-1)
+    # https://stackoverflow.com/questions/40511476/how-to-properly-use-funcformatterfunc
+    formatter2 = FuncFormatter(millions2)
+
+    ax.bar_label(rect1, padding=5,fmt = "%d",color = '#1f77b4',backgroundcolor = '0.8', rotation = 10,size = 9 )
     # ax.bar_label(hbars, labels=['±%.2f' % e for e in error],padding=8, color='b', fontsize=14)
-    ax.bar_label(rect2, padding=2,fmt = '%d')
+    ax.bar_label(rect2, padding=5,fmt = '%d',color = '#ff7f0e',backgroundcolor = '0.8', rotation = 10,size = 9)
+
+
+
 
     # Where on the graph to place X axis ticks
     ax.set_xticks(x)
@@ -91,7 +105,7 @@ def make_charts(cleaned_file):
     # ax.get_yaxis().set_major_formatter(fmt)
 
     def millions(x, pos):
-        'The two args are the value and tick position'
+        # 'The two args are the value and tick position'
         return '%1.1fM' % (x * 1e-6)
     # https://stackoverflow.com/questions/40511476/how-to-properly-use-funcformatterfunc
     formatter = FuncFormatter(millions)
