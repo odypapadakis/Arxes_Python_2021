@@ -14,7 +14,7 @@ from make_charts import *
 import tkinter as tk
 from tkinter import messagebox as mb
 
-# The list below contains the url for each file we want to download, and a name to be appended to the file
+# The list below contains the url for each file we want to download,name to be appended to the file and The original name
 URL_list = [
             [
                 "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/tin00175.tsv.gz"

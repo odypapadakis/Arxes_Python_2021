@@ -23,8 +23,8 @@ def make_charts(cleaned_file):
     # exit(0)
 
     df = cleaned_file[0]
-    title = cleaned_file[2]
-    # ax = plt.subplot()
+    graph_title = cleaned_file[2]
+    ax = plt.subplot()
 
 
 
@@ -40,7 +40,7 @@ def make_charts(cleaned_file):
 
 
     # country_title =
-    ax.set_title(title + "\n" + ' GREECE', fontsize=14)
+    ax.set_title(graph_title + "\n" + ' GREECE', fontsize=14)
 
 
 

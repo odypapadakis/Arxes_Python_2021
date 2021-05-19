@@ -28,5 +28,3 @@ def directory_change():
         else:
             mb.showerror("Error", "No directory selected\n " + "Exiting")
             exit(0)
-    else:
-        pass
