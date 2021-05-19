@@ -11,9 +11,9 @@ from matplotlib.ticker import FuncFormatter
 
 
 
-def make_charts_2(cleaned_file,ax_i):
+def make_charts_2(cleaned_file,ax_i,ax2_i):
 
-    ax = plt.subplot(2, 2, ax_i+1)
+    ax = plt.subplot(2, 2, ax2_i+1)
     #  The list of country codes the data will be plotted for
     country_code = ['EL', 'ES']
 
@@ -33,10 +33,10 @@ def make_charts_2(cleaned_file,ax_i):
     ax.set_facecolor("gainsboro")
 
     # Set the label for the y axis
-    ax.set_ylabel('People', fontsize=16)
+    ax.set_ylabel('People', fontsize=14)
 
     # Set the label for the x axis
-    ax.set_xlabel('YEAR', fontsize=16)
+    ax.set_xlabel('YEAR', fontsize=14)
 
     # Get the names of all the columns into a list
     # ( will be used to title each bar for the bar plot )
@@ -55,10 +55,10 @@ def make_charts_2(cleaned_file,ax_i):
 
     # Keep only the rows that have the country column ends with  the country code we want
     # For example : keep only the rows in which the country column ends with 'EL'
-    df1 = df[(df['COUNTRY'].str.endswith(country_code[0]))]
+    df1 = df[(df['COUNTRY'].str.endswith(country_code[ax_i]))]
 
     #
-    ax.set_title(plot_title + "\n" + country_name[0], fontsize=14)
+    ax.set_title(plot_title + "\n" + country_name[ax_i], fontsize=14)
 
     # Keep only the row that have the country column BEGIN with FOR
     # To keep the foreigners = non residents
@@ -120,7 +120,11 @@ def make_charts(in_file):
     # fig.suptitle('Sharing both axes')
 
 
-    make_charts_2(in_file[0],0)
-    make_charts_2(in_file[1],1)
+    make_charts_2(in_file[0], 0 , 0)
+    make_charts_2(in_file[1], 0 , 1)
+    make_charts_2(in_file[0], 1 , 2)
+    make_charts_2(in_file[1], 1 , 3)
+    # country_code = ['EL', 'ES']
+    # country_name = ['Greece', 'Spain']
 
     plt.show()
