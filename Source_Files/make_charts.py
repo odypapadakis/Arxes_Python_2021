@@ -5,42 +5,38 @@
 
 import matplotlib.pyplot as plt
 import numpy as np
-import matplotlib.ticker as mtick
 from matplotlib.ticker import FuncFormatter
 
 
 
 
 
-def make_charts(in_file):
+def make_charts_2(cleaned_file,ax_i):
+
+    ax = plt.subplot(2, 2, ax_i+1)
     #  The list of country codes the data will be plotted for
-    countries = ['EL', 'ES']
+    country_code = ['EL', 'ES']
 
     # The equivalent names for the above country codes
-    countries_longname = ['Greece', 'Spain']
+    country_name = ['Greece', 'Spain']
 
 
-
-    # asd
-    cleaned_file = in_file[0]
-    # print(cleaned_file)
 
     df = cleaned_file[0]
 
     # Set the plot title as the original file name
     plot_title = cleaned_file[2]
-    
-    ax = plt.subplot()
-    
+
+    # ax = plt.sublot()
+
     # set the subplot background color
     ax.set_facecolor("gainsboro")
 
     # Set the label for the y axis
-    ax.set_ylabel('People',fontsize=16)
+    ax.set_ylabel('People', fontsize=16)
 
     # Set the label for the x axis
     ax.set_xlabel('YEAR', fontsize=16)
-
 
     # Get the names of all the columns into a list
     # ( will be used to title each bar for the bar plot )
@@ -48,15 +44,21 @@ def make_charts(in_file):
     # drop the first column  from the list, as it is a title for the first column
     years.pop(0)
 
+    # Return evenly spaced values based on the length of the list supplied
+    x = np.arange(len(years))  # the label locations
+
+    # Place ticks on the x axis, on the evenly spaced values
+    ax.set_xticks(x)
+
+    # Source for labels to attach to each tick is the years
+    ax.set_xticklabels(years)
 
     # Keep only the rows that have the country column ends with  the country code we want
     # For example : keep only the rows in which the country column ends with 'EL'
-    df1 = df[(df['COUNTRY'].str.endswith(countries[0]))]
+    df1 = df[(df['COUNTRY'].str.endswith(country_code[0]))]
 
-
-
-    # country_title =
-    ax.set_title(plot_title + "\n" + countries_longname[0], fontsize=14)
+    #
+    ax.set_title(plot_title + "\n" + country_name[0], fontsize=14)
 
     # Keep only the row that have the country column BEGIN with FOR
     # To keep the foreigners = non residents
@@ -67,40 +69,23 @@ def make_charts(in_file):
     data_foreign.pop(0)
     data_foreign = [int(i) for i in data_foreign]
 
+    # ----- Code to keep the total number of visitors ---
 
-    print("-------------------------")
-    # Keep in the dataframe only the row that has the country column BEGIN with TOTAL
+    # Keep in a dataframe only the row that has the country column that begins with TOTAL
     # To keep the total number of visitors
     data_total = df1[(df1['COUNTRY'].str.startswith('TOTAL'))]
-    print(data_total)
-    print("-------------------------")
 
-
-    # Convert the  dataframe into a list
+    # Convert the  dataframe into a list of lists
     data_total = data_total.values.tolist()
-    print(data_total)
-    print("-------------------------")
 
+    #  Keep the only item of the list
     data_total = data_total[0]
-    print(data_total)
-    print("-------------------------")
 
+    # Delete the first item of the list, which is the country code and data type ( FOR|TOTAL)
     data_total.pop(0)
-    print(data_total)
-    print("-------------------------")
 
+    # Make the list of strings into a list of integers
     data_total = [int(i) for i in data_total]
-    print(data_total)
-    print("-------------------------")
-
-
-    # Return evenly spaced values based on the length of the list supplied
-    x = np.arange(len(years))  # the label locations
-    # Where on the graph to place X axis ticks
-    ax.set_xticks(x)
-    # Source for labels to attach to each tick is the years
-    ax.set_xticklabels(years)
-
 
     width = 0.3  # the width of the bars of the plot
 
@@ -108,21 +93,17 @@ def make_charts(in_file):
     rect1 = ax.bar(x - width / 2, data_foreign, width, label='Non Residents')
     rect2 = ax.bar(x + width / 2, data_total, width, label='Total')
 
+    #  The labels for the two bars are created
+    ax.bar_label(rect1, padding=5, fmt="%d", color='#1f77b4', backgroundcolor='0.8', rotation=10, size=9)
+    ax.bar_label(rect2, padding=5, fmt='%d', color='#ff7f0e', backgroundcolor='0.8', rotation=10, size=9)
 
-
-    ax.bar_label(rect1, padding=5,fmt = "%d",color = '#1f77b4',backgroundcolor = '0.8', rotation = 10,size = 9 )
-    ax.bar_label(rect2, padding=5,fmt = '%d',color = '#ff7f0e',backgroundcolor = '0.8', rotation = 10,size = 9)
-
-
-
-
-
-
-
-    def millions(x, pos):
-        return '%1.1fM' % (x * 1e-6)
+    # Create the fromatting for the vertical axis
+    # This code was taken from stackoverflow because I was frustrated with formatting
     # https://stackoverflow.com/questions/40511476/how-to-properly-use-funcformatterfunc
-    #  Create the fromatting for the vertical axis
+    def millions(x, pos):
+        # 'The two args are the value and tick position'
+        return '%1.1fM' % (x * 1e-6)
+
     formatter = FuncFormatter(millions)
 
     # Set the formatting for the vertical axis
@@ -130,5 +111,16 @@ def make_charts(in_file):
 
     # Show a legend
     ax.legend()
+
+
+
+def make_charts(in_file):
+    print(in_file)
+    # fig, ax = plt.subplots(3, sharex=True)
+    # fig.suptitle('Sharing both axes')
+
+
+    make_charts_2(in_file[0],0)
+    make_charts_2(in_file[1],1)
 
     plt.show()
