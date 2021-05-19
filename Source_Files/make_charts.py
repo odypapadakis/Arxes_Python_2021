@@ -49,26 +49,50 @@ def make_charts(in_file):
     years.pop(0)
 
 
-    # Keep only the rows that have the country column contains the country code we want
+    # Keep only the rows that have the country column ends with  the country code we want
     # For example : keep only the rows in which the country column ends with 'EL'
-    df1 = df[(df['COUNTRY'].str.contains(countries[0], regex=True))]
+    df1 = df[(df['COUNTRY'].str.endswith(countries[0]))]
+
+
 
     # country_title =
     ax.set_title(plot_title + "\n" + countries_longname[0], fontsize=14)
 
     # Keep only the row that have the country column BEGIN with FOR
-    data_foreign = df1[(df1['COUNTRY'].str.match('FOR'))]
+    # To keep the foreigners = non residents
+    data_foreign = df1[(df1['COUNTRY'].str.startswith('FOR'))]
     # make the
     data_foreign = data_foreign.values.tolist()
     data_foreign = data_foreign[0]
     data_foreign.pop(0)
     data_foreign = [int(i) for i in data_foreign]
 
-    data_total = df1[(df1['COUNTRY'].str.match('TOTAL'))]
+
+    print("-------------------------")
+    # Keep in the dataframe only the row that has the country column BEGIN with TOTAL
+    # To keep the total number of visitors
+    data_total = df1[(df1['COUNTRY'].str.startswith('TOTAL'))]
+    print(data_total)
+    print("-------------------------")
+
+
+    # Convert the  dataframe into a list
     data_total = data_total.values.tolist()
+    print(data_total)
+    print("-------------------------")
+
     data_total = data_total[0]
+    print(data_total)
+    print("-------------------------")
+
     data_total.pop(0)
+    print(data_total)
+    print("-------------------------")
+
     data_total = [int(i) for i in data_total]
+    print(data_total)
+    print("-------------------------")
+
 
     # Return evenly spaced values based on the length of the list supplied
     x = np.arange(len(years))  # the label locations
