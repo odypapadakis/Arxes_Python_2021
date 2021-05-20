@@ -21,7 +21,6 @@ def make_charts_2(cleaned_file,ax_i,ax2_i):
     country_name = ['Greece', 'Spain']
 
 
-
     df = cleaned_file[0]
 
     # Set the plot title as the original file name
