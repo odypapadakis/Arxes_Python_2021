@@ -8,9 +8,6 @@ import numpy as np
 from matplotlib.ticker import FuncFormatter
 
 
-
-
-
 def make_charts_2(cleaned_file,ax_i,ax2_i):
 
     ax = plt.subplot(2, 2, ax2_i+1)
@@ -114,7 +111,7 @@ def make_charts_2(cleaned_file,ax_i,ax2_i):
 
 
 def make_charts(in_file):
-    print(in_file)
+    # print(in_file)
     # fig, ax = plt.subplots(3, sharex=True)
     # fig.suptitle('Sharing both axes')
 

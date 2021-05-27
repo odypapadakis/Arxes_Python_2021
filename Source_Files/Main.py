@@ -54,40 +54,35 @@ dl_files = []
 # Holds datafranes of cleaned files and names. Will be fed to the chart creator
 cleaned_files = []
 
-#------------------  DEBUG---------------
-dl_files.append(['Data_Arrivals.tsv','Arrivals','Arrivals of residents/non-residents at tourist accommodation establishments'])
-dl_files.append(['Data_Nights.tsv','Nights','Nights spent at tourist accommodation establishments by residents/non-residents'])
 
-# print("-------  DOWNLOADING -------")
-# # # Feed the downloader with: 1)the url for each file 2)a string to append to each file
-# for i in range(len(URL_list)):
-#     temp = downloader(URL_list[i][0],URL_list[i][1],URL_list[i][2])
-#     if temp != None :
-#         dl_files.append (temp)
+print("-------  DOWNLOADING -------")
+
+# #------------------  DEBUG---------------
+# dl_files.append(['Data_Arrivals.tsv','Arrivals','Arrivals of residents/non-residents at tourist accommodation establishments'])
+# dl_files.append(['Data_Nights.tsv','Nights','Nights spent at tourist accommodation establishments by residents/non-residents'])
+
+# # Feed the downloader with: 1)the url for each file 2)a string to append to each file
+for i in range(len(URL_list)):
+    temp = downloader(URL_list[i][0],URL_list[i][1],URL_list[i][2])
+    if temp != None :
+        dl_files.append (temp)
 
 # print(dl_files)
 
-# print("-------  PROCESSING DATA    -------")
+print("-------  PROCESSING DATA    -------")
 for i in range(len(dl_files)):
     cleaned_files.append( data_processor (dl_files[i][0],dl_files[i][1],dl_files[i][2]) )
 
-
-print(type (cleaned_files[0][0]))
+# print(type (cleaned_files[0][0]))
 # for i in range(len(cleaned_files)):
-#     print("===================== cleaned_files[",i,"] =====================\n",cleaned_files[i])
+#     # print("===================== cleaned_files[",i,"] =====================\n",cleaned_files[i])
 #     for j in range(len(cleaned_files[i])):
 #         print("==== cleaned_files[", i, "] [",j, "] ====\n", cleaned_files[i][j])
-# exit(0)
-
-# print("-------  MAKING CHARTS    -------")
-# print(cleaned_files)
-# Pass the cleaned dataframe and a title to the chart maker
-# for i in range(len(cleaned_files)):
-#     make_charts(cleaned_files[i])
-
+print("-------  STORING TO DATABASE    -------")
 db_stuff(cleaned_files)
-# print(cleaned_files)
-# make_charts(cleaned_files)
+
+print("-------  MAKING CHARTS    -------")
+make_charts(cleaned_files)
 
 
 
