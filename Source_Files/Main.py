@@ -9,7 +9,7 @@ from directory_selection import *
 from downloader import *
 from data_processor import *
 from db_store import *
-from db_store2 import *
+
 from make_charts import *
 
 import tkinter as tk
@@ -45,7 +45,7 @@ root.title("Αρχές Γλωσσών Python 2021")
 root.geometry("600x300+650+400")  # Width x Height + Padding left + Padding top
 
 # Ask for a location to download the data into
-# directory_change()
+directory_change()
 
 # List of downloaded files, will be fed to the downloader
 # Holds lists with 2 items, filename  and name
