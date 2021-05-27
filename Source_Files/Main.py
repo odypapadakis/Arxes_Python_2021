@@ -9,6 +9,7 @@ from directory_selection import *
 from downloader import *
 from data_processor import *
 from db_store import *
+from db_store2 import *
 from make_charts import *
 
 import tkinter as tk
@@ -84,10 +85,10 @@ print(type (cleaned_files[0][0]))
 # for i in range(len(cleaned_files)):
 #     make_charts(cleaned_files[i])
 
-db_stuff(cleaned_files[0][0])
+db_stuff(cleaned_files)
 # print(cleaned_files)
 # make_charts(cleaned_files)
 
 
 
-mb.showinfo("Job done", "Great Success!\t\t")
+mb.showinfo("Done!\t\t")
