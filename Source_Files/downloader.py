@@ -15,13 +15,13 @@ from os import path
 #      The inputs are:
 #       ur: The url that has the file we need
 #       title: A user decided string, that will help identify the downloaded data
-#       original_name:
+#       original_name: The original file name
 
 
 def downloader(url, title,original_name):
 
     # url = "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/tin00175.tsv.gz"
-    print("Downloading" , title )
+    print("Downloading" , original_name, " as: " , title )
     try:
         requests.get(url, timeout=9.00)   # Expect a response within 9 seconds
     except requests.exceptions:
@@ -61,4 +61,5 @@ def downloader(url, title,original_name):
         # exit(0)
         return None
 
+    # Return the filename on the disk  and the data that was given to the function
     return (filename, title, original_name)
