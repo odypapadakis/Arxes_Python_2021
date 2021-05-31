@@ -8,7 +8,7 @@
 from directory_selection import *
 from downloader import *
 from data_processor import *
-# from db_store import *
+from db_store import *
 from make_charts import *
 import tkinter as tk
 from tkinter import messagebox as mb

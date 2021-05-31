@@ -10,6 +10,7 @@ from matplotlib.ticker import FuncFormatter
 
 def make_charts_2(cleaned_file,ax_i,ax2_i):
 
+    # There will be 4 plots, in a 2 x 2  grid
     ax = plt.subplot(2, 2, ax2_i+1)
     #  The list of country codes the data will be plotted for
     country_code = ['EL', 'ES']
