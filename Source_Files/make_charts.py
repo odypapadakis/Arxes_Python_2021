@@ -115,7 +115,6 @@ def make_charts(in_file):
     # fig, ax = plt.subplots(3, sharex=True)
     # fig.suptitle('Sharing both axes')
 
-
     make_charts_2(in_file[0], 0 , 0)
     make_charts_2(in_file[1], 0 , 1)
     make_charts_2(in_file[0], 1 , 2)
