@@ -14,7 +14,7 @@ from make_charts import *
 import tkinter as tk
 from tkinter import messagebox as mb
 
-# The list below contains 3 items:
+# The list "URL_list" below contains lists that have 3  items:
 # 1) The url for each file we want to download
 # 2) A name to created by the user to easily distinguish the files
 # 3) The original file name from eurostat
@@ -51,8 +51,8 @@ root.geometry("600x300+650+400")  # Width x Height + Padding left + Padding top
 directory_change()
 
 
-# This list of lists contains information about the files that the downloader has downloaded
-# Holds lists, each has 3 items:
+# The list "downloaded_files" contains information about the files that the downloader has downloaded
+# Holds lists, that have 3 items:
 # 1) The filename of the .tsv file that was downloaded
 # 3) The user created title
 # 2) The original filename from the website
@@ -71,9 +71,9 @@ for i in range(len(URL_list)):
         downloaded_files.append(temp)
 
 
-# This list of lists contains the pandas dataframes, which have been "cleaned" by the data processor
-# Holds :
-# 1) pandas datafranes of cleaned files and names. Will be fed to the chart creator and the database creator
+# The list "cleaned_files" contains the cleaned pandas dataframes + additional info
+# Holds lists that have 3 items :
+# 1) pandas dataframe that has been " cleaned "
 # 2) The user created title
 # 3) The original filename from the website
 cleaned_files = []
