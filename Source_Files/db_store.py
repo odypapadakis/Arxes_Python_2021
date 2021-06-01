@@ -1,37 +1,46 @@
 # This function takes a list as its input and created mySQL database tables
 # The list consists of 3 items
-# 1 -> A pandas data frame,
+# 1 ) A pandas data frame,
 #       This dataframe will be inserted into a database table
-# 2 -> A Simple name
+# 2) A Simple name
 #        This name will be used to name our database tables
-# 3 -> The original name of the tsv file, which we do not care about in this function.
+# 3) The original name of the tsv file, which we do not use in this function.
 
+# This function requires a MySQL database to be up and running.
+
+#  Use this !!!
+#  pip install mysql-connector-python
 import mysql.connector
+from tkinter import messagebox as mb
 
 
-def db_stuff(stuff_in):
+def db_stuff(cleaned_file):
 
     # Create the connection to the local mySQL database
     try:
-        mydb = mysql.connector.connect(
+        db_connection = mysql.connector.connect(
             host="localhost",
             user="root",
             password="toor"
         )
     except mysql.connector.Error as err:
-        print("ERROR Something went wrong: {}".format(err))
-        exit(0)
+        print("DATABASE ERROR ", "ERROR Something went wrong:\n {}".format(err))
+        mb.showerror("DATABASE ERROR ", "ERROR Something went wrong:\n {}".format(err))
+        # print("ERROR Something went wrong: {}".format(err))
+        return 1   # Return 1 if unable to connect to a database
 
     # Create a cursor
-    mycursor = mydb.cursor(buffered=True)
+    mycursor = db_connection.cursor(buffered=True)
+
+    # Create the database
     mycursor.execute("DROP DATABASE IF EXISTS arxes_db;")
     mycursor.execute("CREATE DATABASE arxes_db;")
     mycursor.execute("use arxes_db;")
 
-    for k in range(len(stuff_in)):
+    for k in range(len(cleaned_file)):
 
         # First step is to create a table for Arrivals and Nights.
-        table_name = stuff_in[k][1]
+        table_name = cleaned_file[k][1]
         sql = ("CREATE TABLE " +
                table_name +
                "(id INT AUTO_INCREMENT PRIMARY KEY," +
@@ -44,14 +53,15 @@ def db_stuff(stuff_in):
         mycursor.execute(sql)
 
         # For each row in our table
-        for j in range(len(stuff_in[k]) + 1):
+        for j in range(len(cleaned_file[k]) + 1):
 
-            # This will be tha base sql insertion  query, which we will add to , in order to make the insertions
-            sql_insert = "INSERT INTO " + table_name + " (`country_visitor_type`,`2016`,`2017`,`2018`,`2019`) VALUES ('"
+            # Base sql insertion query string , concatenate stuff to it , in order to make the insertions queries
+            sql_insert = "INSERT INTO " + table_name + \
+                         " (`country_visitor_type`,`2016`,`2017`,`2018`,`2019`) VALUES ('"
 
             # for each column item in a row
-            for i in range(len(stuff_in[k][0].columns)):
-                temp = stuff_in[k][0].iloc[j, i]
+            for i in range(len(cleaned_file[k][0].columns)):
+                temp = cleaned_file[k][0].iloc[j, i]
 
                 if i != 0:
                     sql_insert += "'"
@@ -61,6 +71,12 @@ def db_stuff(stuff_in):
 
             sql_insert = sql_insert.rstrip(sql_insert[-1])
             sql_insert += ");"
+
+            # Show the SQL query
             print(sql_insert)
+
+            # Execute it
             mycursor.execute(sql_insert)
-            mydb.commit()
+
+            # Save the changes to the database
+            db_connection.commit()

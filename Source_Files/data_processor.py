@@ -1,3 +1,9 @@
+#  This funtion takes as input:
+# 1) The filename of the .tsv file on disk
+# 2) The user created title of the data
+# 3) The original filename
+
+
 import pandas as pd
 import re
 from os import path
@@ -7,8 +13,6 @@ from tkinter import messagebox as mb
 
 def data_processor(filename, title, original_name):
     print("Processing ", filename)
-
-    # filename = "Data_Arrivals.tsv"
 
     # Select years
     start_year = 2016
@@ -26,7 +30,7 @@ def data_processor(filename, title, original_name):
         selected_years = selected_years + "|" + str(i)
     # For example "2017|2018|2019"
 
-    # Add the ends with character for the regex
+    # Add the 'ends with character'  regex
     selected_countries_RE = selected_countries + "\Z"
 
     # Keep the COUNTRY column, in addition to the selected years column
@@ -38,22 +42,18 @@ def data_processor(filename, title, original_name):
     # Change the first column's name, because it has silly characters and causes problems.
     df = df.rename(columns={df.columns[0]: 'COUNTRY'})
 
-    # --- Filter out rows of countries ---------------
-    # Clear rows that do not math the coutries Regex
+    # Clear rows that do not match the countries Regex
     df = df[(df['COUNTRY'].str.contains(selected_countries_RE, regex=True))]
 
-    # # Apply the mask to the dataframe to filter
-    # df = df[mask]
-
-    # Clar rows that do not start with the visitor type Regex
+    # Clear rows that do not start with the visitor type Regex
     df = df[(df['COUNTRY'].str.match(visitor_type_RE))]
 
-    # --- Filter out columns by year ( and keep the COUNTRY column)------
-    # Filter out the columns that do not match the selected years Regex
+    # Filter out the columns that do not match the selected years
     df = df.filter(regex=selected_years_RE, axis=1)
 
     # --- Rename the file to csv ---
     size = len(filename)
+    # Strip the last 4 character ( remove ".tsv" )
     filename_out = filename[:size - 4]
     filename_out = filename_out + ".csv"
 
@@ -62,7 +62,7 @@ def data_processor(filename, title, original_name):
         overwrite = mb.askquestion("File already exists", "Overwrite --> " + filename_out + " <-- ?? ")
         if overwrite == "no":
             mb.showinfo("No Changes made", " Exiting\t\t")
-            exit(0)
+            return(1)
     # Check for write access
     try:
         # Try to open file to check for write permission
@@ -70,11 +70,12 @@ def data_processor(filename, title, original_name):
         f.close()
     except IOError as ex_IO:
         mb.showinfo(" Error writing file:", "File: \n" + filename_out + "\n Error: " + str(ex_IO))
-        return None
+        return(1)
 
     # Create a csv with the cleared data frame
     df.to_csv(filename_out, encoding='utf-8', index=False)
 
+    # Ask user whether to keep the downloaded file or not
     keep_original_files = mb.askquestion("Keep Downloaded File ?",
                                          "KEEP : " + filename + "\t\t")
     if keep_original_files == "no":
@@ -83,4 +84,8 @@ def data_processor(filename, title, original_name):
         except IOError as ex_IO:
             mb.showinfo(" Error Deleting file:", "File: \n" + filename + "\n Error: " + str(ex_IO))
 
+    #  Return
+    # 1) The " cleaned " pandas dataframe
+    # 2) The user appointed title
+    # 3) The original name from eurostat
     return df, title, original_name
