@@ -1,10 +1,8 @@
 # This function takes a list as its input and created mySQL database tables
 # The list consists of 3 items
 # 1 ) A pandas data frame,
-#       This dataframe will be inserted into a database table
-# 2) A Simple name
-#        This name will be used to name our database tables
-# 3) The original name of the tsv file, which we do not use in this function.
+# 2)  The user appointed name
+# 3) The original name of the tsv file,
 
 # This function requires a MySQL database to be up and running.
 
@@ -16,7 +14,8 @@ from tkinter import messagebox as mb
 
 def db_stuff(cleaned_file):
 
-    # Create the connection to the local mySQL database
+
+    # Create the connection to the local mySQL database and test it
     try:
         db_connection = mysql.connector.connect(
             host="localhost",
@@ -39,7 +38,7 @@ def db_stuff(cleaned_file):
 
     for k in range(len(cleaned_file)):
 
-        # First step is to create a table for Arrivals and Nights.
+        # First step is to create a table which will be named with the user provided name .
         table_name = cleaned_file[k][1]
         sql = ("CREATE TABLE " +
                table_name +
