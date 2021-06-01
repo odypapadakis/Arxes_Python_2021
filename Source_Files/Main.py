@@ -14,7 +14,12 @@ from make_charts import *
 import tkinter as tk
 from tkinter import messagebox as mb
 
-# The list below contains the url for each file we want to download,name to be appended to the file and The original name
+# The list below contains 3 items:
+# 1) The url for each file we want to download
+# 2) A name to created by the user to easily distinguish the files
+# 3) The original file name from eurostat
+#  This list will be passed to the downloader function, to download the data.
+
 URL_list = [
             [
                 "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/tin00175.tsv.gz"
@@ -45,29 +50,37 @@ root.geometry("600x300+650+400")  # Width x Height + Padding left + Padding top
 # Ask for a location to download the data into
 directory_change()
 
-# List of downloaded files, will be fed to the downloader
-# Holds lists with 2 items, filename  and name
-dl_files = []
 
-# Holds datafranes of cleaned files and names. Will be fed to the chart creator and the database creator
-cleaned_files = []
+# This list of lists contains information about the files that the downloader has downloaded
+# Holds lists, each has 3 items:
+# 1) The filename of the .tsv file that was downloaded
+# 3) The user created title
+# 2) The original filename from the website
+downloaded_files = []
 
 # #------------------  DEBUG---------------
-# dl_files.append(['Data_Arrivals.tsv','Arrivals',
+# downloaded_files.append(['Data_Arrivals.tsv','Arrivals',
 # 'Arrivals of residents/non-residents at tourist accommodation establishments'])
-# dl_files.append(['Data_Nights.tsv','Nights',
+# downloaded_files.append(['Data_Nights.tsv','Nights',
 # 'Nights spent at tourist accommodation establishments by residents/non-residents'])
 
 print("-------  DOWNLOADING -------")
 for i in range(len(URL_list)):
     temp = downloader(URL_list[i][0], URL_list[i][1], URL_list[i][2])
     if temp is not None:
-        dl_files.append(temp)
+        downloaded_files.append(temp)
 
+
+# This list of lists contains the pandas dataframes, which have been "cleaned" by the data processor
+# Holds :
+# 1) pandas datafranes of cleaned files and names. Will be fed to the chart creator and the database creator
+# 2) The user created title
+# 3) The original filename from the website
+cleaned_files = []
 
 print("-------  PROCESSING DATA    -------")
-for i in range(len(dl_files)):
-    cleaned_files.append(data_processor(dl_files[i][0], dl_files[i][1], dl_files[i][2]))
+for i in range(len(downloaded_files)):
+    cleaned_files.append(data_processor(downloaded_files[i][0], downloaded_files[i][1], downloaded_files[i][2]))
 
 print("-------  STORING TO DATABASE    -------")
 db_stuff(cleaned_files)

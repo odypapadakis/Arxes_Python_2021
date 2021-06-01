@@ -13,15 +13,15 @@ import requests
 from os import path
 
 #      The inputs are:
-#       ur: The url that has the file we need
-#       title: A user decided string, that will help identify the downloaded data
+#       url: The url that has the file we need
+#       user_title: A user decided string, that will help identify the downloaded data
 #       original_name: The original file name
 
 
-def downloader(url, title,original_name):
+def downloader(url, user_title,original_name):
 
     # url = "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/tin00175.tsv.gz"
-    print("Downloading" , original_name, " as: " , title )
+    print("Downloading" , original_name, " as: " , user_title )
     try:
         requests.get(url, timeout=9.00)   # Expect a response within 9 seconds
     except requests.exceptions:
@@ -38,7 +38,7 @@ def downloader(url, title,original_name):
     extracted_data = gzip.decompress(gz_file.content)
 
     #  Create a title for the downloaded file based on the string the function received
-    filename = "Data_"+title+".tsv"
+    filename = "Data_"+user_title+".tsv"
 
     # tkinter stuff
     root = tk.Tk()
@@ -62,4 +62,4 @@ def downloader(url, title,original_name):
         return None
 
     # Return the filename on the disk  and the data that was given to the function
-    return (filename, title, original_name)
+    return (filename, user_title, original_name)
