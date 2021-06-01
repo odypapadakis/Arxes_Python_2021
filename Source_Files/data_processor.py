@@ -1,5 +1,5 @@
 #  This funtion takes as input:
-# 1) The filename of the .tsv file on disk
+# 1) The filename of the .tsv file on disk that has all the data.
 # 2) The user created title of the data
 # 3) The original filename
 
@@ -14,14 +14,14 @@ from tkinter import messagebox as mb
 def data_processor(filename, title, original_name):
     print("Processing ", filename)
 
-    # Select years
+    # Select years to keep data for.
     start_year = 2016
     end_year = 2019
 
     # Select countries to keep data for
     selected_countries = "EL|ES"
 
-    # Slect visitor type to keep data for. options are (FOR|LOC|TOTAL)
+    # Slect visitor type to keep data for. Options are (FOR|LOC|TOTAL)
     visitor_type_RE = "FOR|TOTAL"
 
     # Create the regular expression that holds the years to be kept in the dataframe
