@@ -10,6 +10,7 @@ from downloader import *
 from data_processor import *
 from db_store import *
 from make_charts import *
+
 import tkinter as tk
 from tkinter import messagebox as mb
 
@@ -36,7 +37,7 @@ URL_list = [
 root = tk.Tk()
 # root.withdraw()
 
-# Tkinter window miscellaneous stuff
+# Tkinter window miscellaneous options
 root.iconbitmap("../Images/favicon.ico")
 root.title("Αρχές Γλωσσών Python 2021")
 root.geometry("600x300+650+400")  # Width x Height + Padding left + Padding top
@@ -48,10 +49,8 @@ directory_change()
 # Holds lists with 2 items, filename  and name
 dl_files = []
 
-# Holds datafranes of cleaned files and names. Will be fed to the chart creator
+# Holds datafranes of cleaned files and names. Will be fed to the chart creator and the database creator
 cleaned_files = []
-
-print("-------  DOWNLOADING -------")
 
 # #------------------  DEBUG---------------
 # dl_files.append(['Data_Arrivals.tsv','Arrivals',
@@ -59,6 +58,7 @@ print("-------  DOWNLOADING -------")
 # dl_files.append(['Data_Nights.tsv','Nights',
 # 'Nights spent at tourist accommodation establishments by residents/non-residents'])
 
+print("-------  DOWNLOADING -------")
 for i in range(len(URL_list)):
     temp = downloader(URL_list[i][0], URL_list[i][1], URL_list[i][2])
     if temp is not None:
