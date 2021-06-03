@@ -118,6 +118,10 @@ def downloader(list_in):
     # 3) The original name from eurostat
     return filename, user_title, original_name
 
+
+
+
+
 # ------------------------------   DATA PROCESSOR  -----------------------------------------------------------
 
 # This function "Cleans" the data to keep just the years / countries / type of visitor we want.
@@ -505,6 +509,13 @@ for i in range(len(URL_list)):
 if not downloaded_files:
     print("No Data Downloaded, Exiting....")
     mb.showerror("No Data Downloaded", "No Data. \n " + "Exiting...")
+    exit(0)
+
+
+# Ask user whether to continue with processing the data
+continue_after_download = mb.askquestion("Continue to data processing ?",
+                                         "You can stop here and just keep the downloaded files."  "\t\t")
+if continue_after_download == "no":
     exit(0)
 
 # The list "cleaned_files" contains the cleaned pandas dataframes + additional info
