@@ -97,14 +97,14 @@ db_store(cleaned_files)
 
 #  The list of country codes the data will be plotted for
 # global country_code
-country_code = ['EL', 'ES']
+country_codes = ['EL', 'ES']
 
 # The equivalent names for the above country codes
 # global country_name
-country_name = ['Greece', 'Spain']
+country_names = ['Greece', 'Spain']
 
 
 print("-------  MAKING CHARTS    -------")
-make_charts(cleaned_files,country_code,country_name)
+make_charts(cleaned_files,country_codes,country_names)
 
 mb.showinfo("Done!\t\t")
