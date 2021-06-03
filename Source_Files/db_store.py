@@ -76,7 +76,7 @@ def db_store(list_in):
             sql_insert = sql_insert.rstrip(sql_insert[-1])
             sql_insert += ");"
 
-            # Show the SQL query
+            # # Show the SQL query
             # print(sql_insert)
 
             # Execute it
