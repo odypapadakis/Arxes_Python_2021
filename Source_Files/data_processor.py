@@ -18,7 +18,13 @@ from os import remove
 from tkinter import messagebox as mb
 
 
-def data_processor(filename, title, original_name):
+def data_processor(list_in):
+
+    filename = list_in[0]
+    user_title = list_in[1]
+    original_name = list_in[2]
+
+
     print("Processing ", filename)
 
     #  ----------  Selection of years, countries, visitor types --------------------------------
@@ -102,4 +108,4 @@ def data_processor(filename, title, original_name):
     # 1) The " cleaned " pandas dataframe
     # 2) The user appointed title
     # 3) The original file name from eurostat
-    return df, title, original_name
+    return df, user_title, original_name

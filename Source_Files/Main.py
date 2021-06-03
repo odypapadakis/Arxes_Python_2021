@@ -10,17 +10,19 @@ from downloader import *
 from data_processor import *
 from db_store import *
 from make_charts import *
+from make_charts_v2 import *
 
 import tkinter as tk
 from tkinter import messagebox as mb
 
-# The list "URL_list" below contains lists that have 3  items:
+# The list "URL_list" below contains 2 lists that have 3  items:
 # 1) The url for each file we want to download
 # 2) A name to created by the user to easily distinguish the files
 # 3) The original file name from eurostat
 #  This list will be passed to the downloader function, to download the data.
 
 URL_list = [
+            # list 1
             [
                 "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/tin00175.tsv.gz"
                 ,
@@ -29,6 +31,7 @@ URL_list = [
                 "Nights spent at tourist accommodation establishments by residents/non-residents"
             ]
             ,
+            # list 2
             [
                 "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/tin00174.tsv.gz"
                 ,
@@ -66,7 +69,8 @@ downloaded_files = []
 
 print("-------  DOWNLOADING -------")
 for i in range(len(URL_list)):
-    temp = downloader(URL_list[i][0], URL_list[i][1], URL_list[i][2])
+    # Feed each item of the URL list to the downloader
+    temp = downloader(URL_list[i])
     if temp is not None:
         downloaded_files.append(temp)
 
@@ -80,7 +84,12 @@ cleaned_files = []
 
 print("-------  PROCESSING DATA    -------")
 for i in range(len(downloaded_files)):
-    cleaned_files.append(data_processor(downloaded_files[i][0], downloaded_files[i][1], downloaded_files[i][2]))
+    cleaned_files.append(data_processor(downloaded_files[i]))
+
+if not cleaned_files:
+    print("No Data, Exiting....")
+    mb.showerror("No Data", "No Data. \n " + "Exiting...")
+    exit(0)
 
 print("-------  STORING TO DATABASE    -------")
 db_store(cleaned_files)

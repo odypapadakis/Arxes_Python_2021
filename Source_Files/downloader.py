@@ -18,7 +18,11 @@ from os import path
 #       3) original_name: The original file name
 
 
-def downloader(url, user_title, original_name):
+def downloader(list_in):
+
+    url = list_in[0]
+    user_title = list_in[1]
+    original_name = list_in[2]
 
     print("Downloading" , original_name, " as: " , user_title )
     try:

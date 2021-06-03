@@ -38,8 +38,12 @@ def db_store(list_in):
 
     for k in range(len(list_in)):
 
+
+        df = list_in[k][0]
+        user_title = list_in[k][1]
+
         # First step is to create a table which will be named with the user provided name .
-        table_name = list_in[k][1]
+        table_name = user_title
         sql = ("CREATE TABLE " +
                table_name +
                "(id INT AUTO_INCREMENT PRIMARY KEY," +
@@ -59,8 +63,8 @@ def db_store(list_in):
                          " (`country_visitor_type`,`2016`,`2017`,`2018`,`2019`) VALUES ('"
 
             # for each column item in a row
-            for i in range(len(list_in[k][0].columns)):
-                temp = list_in[k][0].iloc[j, i]
+            for i in range(len(df.columns)):
+                temp = df.iloc[j, i]
 
                 if i != 0:
                     sql_insert += "'"

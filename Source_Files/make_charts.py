@@ -14,7 +14,7 @@ from matplotlib.ticker import FuncFormatter
 def make_charts_2(df_in,ax_i,ax2_i):
 
     # There will be 4 plots, in a 2 x 2  grid
-    ax = plt.subplot(2, 2, ax2_i+1)
+    plot = plt.subplot(2, 2, ax2_i+1)
 
     #  The list of country codes the data will be plotted for
     country_code = ['EL', 'ES']
@@ -23,7 +23,9 @@ def make_charts_2(df_in,ax_i,ax2_i):
     country_name = ['Greece', 'Spain']
 
     df = df_in[0]
-    print(df_in)
+
+    print("df_in --> ",df_in)
+    print("df --> ", df)
 
     # Set the plot title as the original file name
     plot_title = df_in[2]
@@ -31,13 +33,13 @@ def make_charts_2(df_in,ax_i,ax2_i):
     # ax = plt.sublot()
 
     # set the subplot background color
-    ax.set_facecolor("gainsboro")
+    plot.set_facecolor("gainsboro")
 
     # Set the label for the y axis
-    ax.set_ylabel('People', fontsize=14)
+    plot.set_ylabel('People', fontsize=14)
 
     # Set the label for the x axis
-    ax.set_xlabel('YEAR', fontsize=14)
+    plot.set_xlabel('YEAR', fontsize=14)
 
     # Get the names of all the columns into a list
     # ( will be used to title each bar for the bar plot )
@@ -49,17 +51,17 @@ def make_charts_2(df_in,ax_i,ax2_i):
     x = np.arange(len(years))  # the label locations
 
     # Place ticks on the x axis, on the evenly spaced values
-    ax.set_xticks(x)
+    plot.set_xticks(x)
 
     # Source for labels to attach to each tick is the years
-    ax.set_xticklabels(years)
+    plot.set_xticklabels(years)
 
     # Keep only the rows that have the country column ends with  the country code we want
     # For example : keep only the rows in which the country column ends with 'EL'
     df1 = df[(df['COUNTRY'].str.endswith(country_code[ax_i]))]
 
     #
-    ax.set_title(plot_title + "\n" + country_name[ax_i], fontsize=14)
+    plot.set_title(plot_title + "\n" + country_name[ax_i], fontsize=14)
 
     # Keep only the row that have the country column BEGIN with FOR
     # To keep the foreigners = non residents
@@ -91,12 +93,12 @@ def make_charts_2(df_in,ax_i,ax2_i):
     width = 0.3  # the width of the bars of the plot
 
     # The two bars are created
-    rect1 = ax.bar(x - width / 2, data_foreign, width, label='Non Residents')
-    rect2 = ax.bar(x + width / 2, data_total, width, label='Total')
+    rect1 = plot.bar(x - width / 2, data_foreign, width, label='Non Residents')
+    rect2 = plot.bar(x + width / 2, data_total, width, label='Total')
 
     #  The labels for the two bars are created
-    ax.bar_label(rect1, padding=5, fmt="%d", color='#1f77b4', backgroundcolor='0.8', rotation=10, size=9)
-    ax.bar_label(rect2, padding=5, fmt='%d', color='#ff7f0e', backgroundcolor='0.8', rotation=10, size=9)
+    plot.bar_label(rect1, padding=5, fmt="%d", color='#1f77b4', backgroundcolor='0.8', rotation=10, size=9)
+    plot.bar_label(rect2, padding=5, fmt='%d', color='#ff7f0e', backgroundcolor='0.8', rotation=10, size=9)
 
     # Create the fromatting for the vertical axis
     # This code was taken from stackoverflow because I was frustrated with formatting
@@ -108,22 +110,23 @@ def make_charts_2(df_in,ax_i,ax2_i):
     formatter = FuncFormatter(millions)
 
     # Set the formatting for the vertical axis
-    ax.get_yaxis().set_major_formatter(formatter)
+    plot.get_yaxis().set_major_formatter(formatter)
 
     # Show a legend
-    ax.legend()
+    plot.legend()
 
 
-# This function takes a list as its input
-# The list consists of 3 items
+# This function takes a list  of listsas its input
+# The each list consists of 3 items
 # 1 ) A pandas data frame  ,
 # 2)  The user appointed name
 # 3) The original name of the tsv file
 
 def make_charts(in_file):
 
-    print(in_file)
-    exit(0)
+    # print(in_file)
+    # exit(0)
+
     make_charts_2(in_file[0], 0, 0)
     make_charts_2(in_file[0], 1, 2)
     make_charts_2(in_file[1], 0, 1)
