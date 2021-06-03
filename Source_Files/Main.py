@@ -4,6 +4,8 @@
 # Creates some charts
 # And stores it into a mysql database
 # Created by Odysseas papadakis
+# papadako@ceid.upatras.gr
+# AM: 1041152
 
 from directory_selection import *
 from downloader import *
@@ -15,9 +17,9 @@ from make_charts_v2 import *
 import tkinter as tk
 from tkinter import messagebox as mb
 
-# The list "URL_list" below contains 2 lists that have 3  items:
+# The list "URL_list"  contains  lists that have 3  items:
 # 1) The url for each file we want to download
-# 2) A name to created by the user to easily distinguish the files
+# 2) A name created by the user to easily distinguish the file
 # 3) The original file name from eurostat
 #  This list will be passed to the downloader function, to download the data.
 
@@ -46,7 +48,7 @@ root = tk.Tk()
 # root.withdraw()
 
 # Tkinter window miscellaneous options
-root.iconbitmap("../Images/favicon.ico")
+# root.iconbitmap("../Images/favicon.ico")
 root.title("Αρχές Γλωσσών Python 2021")
 root.geometry("600x300+650+400")  # Width x Height + Padding left + Padding top
 
@@ -54,18 +56,19 @@ root.geometry("600x300+650+400")  # Width x Height + Padding left + Padding top
 directory_change()
 
 
-# The list "downloaded_files" contains information about the files that the downloader has downloaded
-# Holds lists, that have 3 items:
-# 1) The filename of the .tsv file that was downloaded
-# 3) The user created title
-# 2) The original filename from the website
-downloaded_files = []
 
 # #------------------  DEBUG---------------
 # downloaded_files.append(['Data_Arrivals.tsv','Arrivals',
 # 'Arrivals of residents/non-residents at tourist accommodation establishments'])
 # downloaded_files.append(['Data_Nights.tsv','Nights',
 # 'Nights spent at tourist accommodation establishments by residents/non-residents'])
+
+# The list "downloaded_files" contains information about the files that the downloader has downloaded
+# It Holds lists, that have 3 items each:
+# 1) The filename of the .tsv file that was downloaded
+# 3) The user created title
+# 2) The original filename from the website
+downloaded_files = []
 
 print("-------  DOWNLOADING -------")
 for i in range(len(URL_list)):
@@ -74,6 +77,10 @@ for i in range(len(URL_list)):
     if temp is not None:
         downloaded_files.append(temp)
 
+if not downloaded_files:
+    print("No Data Downloaded, Exiting....")
+    mb.showerror("No Data Downloaded", "No Data. \n " + "Exiting...")
+    exit(0)
 
 # The list "cleaned_files" contains the cleaned pandas dataframes + additional info
 # Holds lists that have 3 items :
