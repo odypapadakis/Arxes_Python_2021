@@ -1,28 +1,32 @@
 
-# This function takes as input a list that contains:
-#  A pandas data frame and a sting ( title ) and the original string
-# [dataframe,local_name,original_name]
+
 
 import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.ticker import FuncFormatter
 
 
-def make_charts_2(cleaned_file,ax_i,ax2_i):
+# This function takes 3 inputs:
+# 1) A pandas dataframe
+# 2) The
+# 3) The
+
+def make_charts_2(df_in,ax_i,ax2_i):
 
     # There will be 4 plots, in a 2 x 2  grid
     ax = plt.subplot(2, 2, ax2_i+1)
+
     #  The list of country codes the data will be plotted for
     country_code = ['EL', 'ES']
 
     # The equivalent names for the above country codes
     country_name = ['Greece', 'Spain']
 
-
-    df = cleaned_file[0]
+    df = df_in[0]
+    print(df_in)
 
     # Set the plot title as the original file name
-    plot_title = cleaned_file[2]
+    plot_title = df_in[2]
 
     # ax = plt.sublot()
 
@@ -110,17 +114,19 @@ def make_charts_2(cleaned_file,ax_i,ax2_i):
     ax.legend()
 
 
+# This function takes a list as its input
+# The list consists of 3 items
+# 1 ) A pandas data frame  ,
+# 2)  The user appointed name
+# 3) The original name of the tsv file
 
 def make_charts(in_file):
-    # print(in_file)
-    # fig, ax = plt.subplots(3, sharex=True)
-    # fig.suptitle('Sharing both axes')
 
-    make_charts_2(in_file[0], 0 , 0)
-    make_charts_2(in_file[1], 0 , 1)
-    make_charts_2(in_file[0], 1 , 2)
-    make_charts_2(in_file[1], 1 , 3)
-    # country_code = ['EL', 'ES']
-    # country_name = ['Greece', 'Spain']
+    print(in_file)
+    exit(0)
+    make_charts_2(in_file[0], 0, 0)
+    make_charts_2(in_file[0], 1, 2)
+    make_charts_2(in_file[1], 0, 1)
+    make_charts_2(in_file[1], 1, 3)
 
     plt.show()

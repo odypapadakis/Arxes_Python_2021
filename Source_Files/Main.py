@@ -83,7 +83,7 @@ for i in range(len(downloaded_files)):
     cleaned_files.append(data_processor(downloaded_files[i][0], downloaded_files[i][1], downloaded_files[i][2]))
 
 print("-------  STORING TO DATABASE    -------")
-db_stuff(cleaned_files)
+db_store(cleaned_files)
 
 print("-------  MAKING CHARTS    -------")
 make_charts(cleaned_files)

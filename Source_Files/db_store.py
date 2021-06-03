@@ -1,6 +1,6 @@
 # This function takes a list as its input and created mySQL database tables
 # The list consists of 3 items
-# 1 ) A pandas data frame,
+# 1 ) A pandas data frame list_in[0] ,
 # 2)  The user appointed name
 # 3) The original name of the tsv file,
 
@@ -12,7 +12,7 @@ import mysql.connector
 from tkinter import messagebox as mb
 
 
-def db_stuff(cleaned_file):
+def db_store(list_in):
 
 
     # Create the connection to the local mySQL database and test it
@@ -36,10 +36,10 @@ def db_stuff(cleaned_file):
     mycursor.execute("CREATE DATABASE arxes_db;")
     mycursor.execute("use arxes_db;")
 
-    for k in range(len(cleaned_file)):
+    for k in range(len(list_in)):
 
         # First step is to create a table which will be named with the user provided name .
-        table_name = cleaned_file[k][1]
+        table_name = list_in[k][1]
         sql = ("CREATE TABLE " +
                table_name +
                "(id INT AUTO_INCREMENT PRIMARY KEY," +
@@ -52,15 +52,15 @@ def db_stuff(cleaned_file):
         mycursor.execute(sql)
 
         # For each row in our table
-        for j in range(len(cleaned_file[k]) + 1):
+        for j in range(len(list_in[k]) + 1):
 
             # Base sql insertion query string , concatenate stuff to it , in order to make the insertions queries
             sql_insert = "INSERT INTO " + table_name + \
                          " (`country_visitor_type`,`2016`,`2017`,`2018`,`2019`) VALUES ('"
 
             # for each column item in a row
-            for i in range(len(cleaned_file[k][0].columns)):
-                temp = cleaned_file[k][0].iloc[j, i]
+            for i in range(len(list_in[k][0].columns)):
+                temp = list_in[k][0].iloc[j, i]
 
                 if i != 0:
                     sql_insert += "'"
@@ -72,7 +72,7 @@ def db_stuff(cleaned_file):
             sql_insert += ");"
 
             # Show the SQL query
-            print(sql_insert)
+            # print(sql_insert)
 
             # Execute it
             mycursor.execute(sql_insert)
