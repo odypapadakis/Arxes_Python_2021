@@ -24,7 +24,7 @@ def make_charts_2(list_in, subplot_number, country_code, country_name):
     # Set the title of the subplot
     plot.set_title(plot_title + "\n" + country_name, fontsize=14)
 
-    # set the subplot background color
+    # set the subplot background color for better readability
     plot.set_facecolor("gainsboro")
 
     # Set the label for the y axis
@@ -51,6 +51,8 @@ def make_charts_2(list_in, subplot_number, country_code, country_name):
 
     # Source for labels text  to attach to each tick is the years
     plot.set_xticklabels(years)
+
+    # -------------   Code to keep the correct country rows  -------------
 
     # Keep only the rows that have the country column ends with  the country code we want
     # example : keep only the rows in which the country column ends with 'EL'
@@ -84,8 +86,6 @@ def make_charts_2(list_in, subplot_number, country_code, country_name):
     # Make the list of strings into a list of integers
     data_total = [int(i) for i in data_total]
 
-
-
     width = 0.3  # the width of the bars of the plot
 
     # The two bars are created
@@ -101,7 +101,7 @@ def make_charts_2(list_in, subplot_number, country_code, country_name):
     # https://stackoverflow.com/questions/40511476/how-to-properly-use-funcformatterfunc
     def millions(x, pos):
         return '%1.1fM' % (x * 1e-6)
-
+    # Create the formatting for the vertical axis
     formatter = FuncFormatter(millions)
 
     # Set the formatting for the vertical axis
@@ -116,8 +116,9 @@ def make_charts_2(list_in, subplot_number, country_code, country_name):
 #   1.1) A pandas data frame
 #   1.2)  The user appointed name
 #   1.3) The original name of the tsv file
-# 2) A list of country codes ['EL', 'ES']
-# 3) A list of country names ['Greece', 'Spain']
+# 2) The number of the subplot to be created
+# 3) A list of country codes ['EL', 'ES']
+# 4) A list of country names ['Greece', 'Spain']
 
 def make_charts(in_list, country_codes, country_names):
 
