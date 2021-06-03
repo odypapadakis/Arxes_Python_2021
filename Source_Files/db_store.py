@@ -1,9 +1,4 @@
-# This function takes a list as its input and created mySQL database tables
-# The list consists of 3 items
-# 1 ) A pandas data frame list_in[0] ,
-# 2)  The user appointed name
-# 3) The original name of the tsv file,
-
+# This function creates mySQL database from the input data
 # This function requires a MySQL database to be up and running.
 
 #  Use this !!!
@@ -11,6 +6,11 @@
 import mysql.connector
 from tkinter import messagebox as mb
 
+
+# The inputis a list of  lists, each consistsing of 3 items
+# 1 ) A pandas data frame list_in ,
+# 2)  The user appointed name
+# 3) The original name of the tsv file
 
 def db_store(list_in):
 
@@ -61,23 +61,24 @@ def db_store(list_in):
 
             # Base sql insertion query string , concatenate stuff to it , in order to make the insertions queries
             sql_insert = "INSERT INTO " + table_name + \
-                         " (`country_visitor_type`,`2016`,`2017`,`2018`,`2019`) VALUES ('"
+                         " (`country_visitor_type`,`2016`,`2017`,`2018`,`2019`) VALUES ("
 
             # for each column item in a row
             for i in range(len(df.columns)):
-                temp = df.iloc[j, i]
+                temp = "`"
+                temp += df.iloc[j, i]
 
-                if i != 0:
-                    sql_insert += "'"
-                    temp = temp.rstrip(temp[-1])
-
-                sql_insert += temp + "',"
+                # if i != 0:
+                #     sql_insert += "'"
+                #     temp = temp.rstrip(temp[-1])
+                temp = temp.rstrip(temp[-1])
+                sql_insert += temp + "`,"
 
             sql_insert = sql_insert.rstrip(sql_insert[-1])
             sql_insert += ");"
 
             # Show the SQL query
-            # print(sql_insert)
+            print(sql_insert)
 
             # Execute it
             mycursor.execute(sql_insert)

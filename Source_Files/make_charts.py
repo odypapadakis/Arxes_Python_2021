@@ -96,11 +96,10 @@ def make_charts_2(list_in, subplot_number, country_code, country_name):
     plot.bar_label(rect1, padding=5, fmt="%d", color='#1f77b4', backgroundcolor='0.8', rotation=10, size=9)
     plot.bar_label(rect2, padding=5, fmt='%d', color='#ff7f0e', backgroundcolor='0.8', rotation=10, size=9)
 
-    # Create the fromatting for the vertical axis
-    # This code was taken from stackoverflow because I was frustrated with formatting
+    # Create the formatting for the vertical axis
+    # This code was taken from stackoverflow
     # https://stackoverflow.com/questions/40511476/how-to-properly-use-funcformatterfunc
     def millions(x, pos):
-        # 'The two args are the value and tick position'
         return '%1.1fM' % (x * 1e-6)
 
     formatter = FuncFormatter(millions)
