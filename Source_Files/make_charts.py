@@ -5,32 +5,23 @@ import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.ticker import FuncFormatter
 
-
 # This function takes 3 inputs:
 # 1) A pandas dataframe
 # 2) The
-# 3) The
+# 3) The     number of the subplot
 
-def make_charts_2(df_in,ax_i,ax2_i):
+
+def make_charts_2(df_in, country_index, subplot_number, country_code, country_name):
 
     # There will be 4 plots, in a 2 x 2  grid
-    plot = plt.subplot(2, 2, ax2_i+1)
-
-    #  The list of country codes the data will be plotted for
-    country_code = ['EL', 'ES']
-
-    # The equivalent names for the above country codes
-    country_name = ['Greece', 'Spain']
+    plot = plt.subplot(2, 2, subplot_number)
 
     df = df_in[0]
 
-    print("df_in --> ",df_in)
-    print("df --> ", df)
-
     # Set the plot title as the original file name
     plot_title = df_in[2]
+    # print(df_in[2])
 
-    # ax = plt.sublot()
 
     # set the subplot background color
     plot.set_facecolor("gainsboro")
@@ -58,10 +49,10 @@ def make_charts_2(df_in,ax_i,ax2_i):
 
     # Keep only the rows that have the country column ends with  the country code we want
     # For example : keep only the rows in which the country column ends with 'EL'
-    df1 = df[(df['COUNTRY'].str.endswith(country_code[ax_i]))]
+    df1 = df[(df['COUNTRY'].str.endswith(country_code[country_index]))]
 
     #
-    plot.set_title(plot_title + "\n" + country_name[ax_i], fontsize=14)
+    plot.set_title(plot_title + "\n" + country_name[country_index], fontsize=14)
 
     # Keep only the row that have the country column BEGIN with FOR
     # To keep the foreigners = non residents
@@ -122,14 +113,14 @@ def make_charts_2(df_in,ax_i,ax2_i):
 # 2)  The user appointed name
 # 3) The original name of the tsv file
 
-def make_charts(in_file):
+def make_charts(in_file, country_code, country_name):
 
-    # print(in_file)
-    # exit(0)
-
-    make_charts_2(in_file[0], 0, 0)
-    make_charts_2(in_file[0], 1, 2)
-    make_charts_2(in_file[1], 0, 1)
-    make_charts_2(in_file[1], 1, 3)
+    # 1) A pandas dataframe
+    # 2) The country index
+    # 3) The number of the subplot
+    make_charts_2(in_file[0], 0, 1, country_code, country_name)
+    make_charts_2(in_file[0], 1, 3, country_code, country_name)
+    make_charts_2(in_file[1], 0, 2, country_code, country_name)
+    make_charts_2(in_file[1], 1, 4, country_code, country_name)
 
     plt.show()

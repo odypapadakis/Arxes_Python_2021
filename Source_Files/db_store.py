@@ -38,8 +38,9 @@ def db_store(list_in):
 
     for k in range(len(list_in)):
 
-
+        #  Get the dataframe from the list
         df = list_in[k][0]
+        #  Get the user title from the list ( will be the name of the table )
         user_title = list_in[k][1]
 
         # First step is to create a table which will be named with the user provided name .

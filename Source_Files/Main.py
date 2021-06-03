@@ -94,7 +94,17 @@ if not cleaned_files:
 print("-------  STORING TO DATABASE    -------")
 db_store(cleaned_files)
 
+
+#  The list of country codes the data will be plotted for
+# global country_code
+country_code = ['EL', 'ES']
+
+# The equivalent names for the above country codes
+# global country_name
+country_name = ['Greece', 'Spain']
+
+
 print("-------  MAKING CHARTS    -------")
-make_charts(cleaned_files)
+make_charts(cleaned_files,country_code,country_name)
 
 mb.showinfo("Done!\t\t")
