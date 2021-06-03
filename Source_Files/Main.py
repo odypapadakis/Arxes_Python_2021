@@ -103,7 +103,6 @@ country_codes = ['EL', 'ES']
 # global country_name
 country_names = ['Greece', 'Spain']
 
-
 print("-------  MAKING CHARTS    -------")
 make_charts(cleaned_files,country_codes,country_names)
 

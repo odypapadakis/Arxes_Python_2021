@@ -1,14 +1,16 @@
 
-
-
 import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.ticker import FuncFormatter
 
-# This function takes 3 inputs:
-# 1) A pandas dataframe
-# 2) The
-# 3) The     number of the subplot
+# This function takes 4 inputs:
+# 1) A list that contains:
+#   1.1) a pandas dataframe
+#   1.2) The user title
+#   1.3) The original file name to be used as the subplot title
+# 2) The number of the subplot
+# 3) The list of country codes
+# 4) The list of country names
 
 
 def make_charts_2(list_in, subplot_number, country_code, country_name):
@@ -16,11 +18,11 @@ def make_charts_2(list_in, subplot_number, country_code, country_name):
     # There will be 4 plots, in a 2 x 2  grid
     plot = plt.subplot(2, 2, subplot_number)
 
-    df = list_in[0]
-
     # Set the plot title as the original file name
     plot_title = list_in[2]
-    # print(list_in[2])
+
+    # Set the title of the subplot
+    plot.set_title(plot_title + "\n" + country_name, fontsize=14)
 
     # set the subplot background color
     plot.set_facecolor("gainsboro")
@@ -31,29 +33,30 @@ def make_charts_2(list_in, subplot_number, country_code, country_name):
     # Set the label for the x axis
     plot.set_xlabel('YEAR', fontsize=14)
 
+    # Get the dataframe from the list
+    df = list_in[0]
+
     # Get the names of all the columns into a list
     # ( will be used to title each bar for the bar plot )
     years = df.columns.tolist()
-    # drop the first column  from the list, as it is a title for the first column
+    # drop the first column  from the list
     years.pop(0)
 
     # Return evenly spaced values based on the length of the list supplied
+    # example: For 4 years, x will be [ 0 1 2 3]
     x = np.arange(len(years))  # the label locations
 
-    # Place ticks on the x axis, on the evenly spaced values
+    # Place  ticks(labels) on the x axis, on the evenly spaced values
     plot.set_xticks(x)
 
-    # Source for labels to attach to each tick is the years
+    # Source for labels text  to attach to each tick is the years
     plot.set_xticklabels(years)
 
     # Keep only the rows that have the country column ends with  the country code we want
-    # For example : keep only the rows in which the country column ends with 'EL'
+    # example : keep only the rows in which the country column ends with 'EL'
     df1 = df[(df['COUNTRY'].str.endswith(country_code))]
 
-    #
-    plot.set_title(plot_title + "\n" + country_name, fontsize=14)
-
-    # -------------   Code to keep the total number of visitors -------------
+    # -------------   Code to keep the  number of Foreign visitors -------------
 
     # Keep only the row that have the country column BEGIN with FOR
     # To keep the foreigners = non residents
@@ -109,33 +112,18 @@ def make_charts_2(list_in, subplot_number, country_code, country_name):
     plot.legend()
 
 
-# This function takes a list  of listsas its input
-# The each list consists of 3 items
-# 1 ) A pandas data frame  ,
-# 2)  The user appointed name
-# 3) The original name of the tsv file
+# This function takes as input
+# 1) A list of lists, each list consists of 3 items
+#   1.1) A pandas data frame
+#   1.2)  The user appointed name
+#   1.3) The original name of the tsv file
+# 2) A list of country codes ['EL', 'ES']
+# 3) A list of country names ['Greece', 'Spain']
 
 def make_charts(in_list, country_codes, country_names):
 
-    # 1) A list that contains:
-    #   1.1) a pandas dataframe
-    #   1.2) The user title
-    #   1.3) The original name
-    # 2) The number of the subplot
-    # 3) The list of country codes
-    # 4) The list of country names
-    
-    print("----------------------------------------------")
-    print("in_list is:",in_list)
-    print("----------------------------------------------")
 
-    nigths_list = in_list[0][0]
-    nights_user_title = in_list[0][1]
-    nights_original_title = in_list[0][2]
-    print("----------------------------------------------")
-    print("nigths_list is:", nigths_list)
-    print("----------------------------------------------")
-    
+    nigths_list = in_list[0]
     arrivals_list = in_list[1]
 
     make_charts_2(nigths_list,     1, country_codes[0], country_names[0])
