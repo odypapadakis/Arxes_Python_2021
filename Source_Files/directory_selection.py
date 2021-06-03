@@ -1,10 +1,10 @@
-# This Function asks the user to specify a directory to store the files.
 
 import os
 import tkinter as tk
 from tkinter import filedialog
 from tkinter import messagebox as mb
 
+# This Function asks the user to specify a directory to store the files.
 
 def directory_change():
 
