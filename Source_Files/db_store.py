@@ -65,20 +65,20 @@ def db_store(list_in):
 
             # for each column item in a row
             for i in range(len(df.columns)):
-                temp = "`"
+                temp = "'"
                 temp += df.iloc[j, i]
 
-                # if i != 0:
-                #     sql_insert += "'"
-                #     temp = temp.rstrip(temp[-1])
+                # Delete the whitespace after the df item
                 temp = temp.rstrip(temp[-1])
-                sql_insert += temp + "`,"
 
+                sql_insert += temp + "',"
+
+            #  Delete the last comma
             sql_insert = sql_insert.rstrip(sql_insert[-1])
             sql_insert += ");"
 
-            # Show the SQL query
-            print(sql_insert)
+            # # Show the SQL query
+            # print(sql_insert)
 
             # Execute it
             mycursor.execute(sql_insert)
