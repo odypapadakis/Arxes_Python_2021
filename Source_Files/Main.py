@@ -1,18 +1,13 @@
-# This is a program that downloads data from eurostat.
+# This is a program that downloads some  data from eurostat.
 # It cleans it up
 # Saves it as csv files
 # Creates some charts
 # And stores it into a mysql database
 # Created by Odysseas papadakis
 # papadako@ceid.upatras.gr
-# AM: 1041152
+# AM: 104115
+# 2021
 
-# from directory_selection import *
-# from downloader import *
-# from data_processor import *
-# from db_store import *
-# from make_charts import *
-# from make_charts_v2 import *
 
 import matplotlib.pyplot as plt
 from matplotlib.ticker import FuncFormatter
@@ -31,6 +26,10 @@ import re
 #  Use this !!!
 #  pip install mysql-connector-python
 import mysql.connector
+
+#    _______________________________
+#   |   Main code is at line 437    |
+#   |_______________________________|
 
 # ------------------------------   DIRECTORY SELECTOR -----------------------------------------------------------
 # This Function asks the user to specify a directory to store the files.
@@ -117,10 +116,6 @@ def downloader(list_in):
     # 2) The title set by the user
     # 3) The original name from eurostat
     return filename, user_title, original_name
-
-
-
-
 
 # ------------------------------   DATA PROCESSOR  -----------------------------------------------------------
 
@@ -445,12 +440,12 @@ def make_charts(in_list, country_codes, country_names):
 
 # ------------------------------   MAIN CODE  -----------------------------------------------------------
 
-
-# The list "URL_list"  contains  lists that have 3  items:
+# The list "URL_list"  contains  lists that have 3  items each :
 # 1) The url for each file we want to download
 # 2) A name created by the user to easily distinguish the file
 # 3) The original file name from eurostat
 #  This list will be passed to the downloader function, to download the data.
+
 
 URL_list = [
             # list 1
@@ -484,14 +479,6 @@ root.geometry("600x300+650+400")  # Width x Height + Padding left + Padding top
 # Ask for a location to download the data into
 directory_change()
 
-
-
-# #------------------  DEBUG---------------
-# downloaded_files.append(['Data_Arrivals.tsv','Arrivals',
-# 'Arrivals of residents/non-residents at tourist accommodation establishments'])
-# downloaded_files.append(['Data_Nights.tsv','Nights',
-# 'Nights spent at tourist accommodation establishments by residents/non-residents'])
-
 # The list "downloaded_files" contains information about the files that the downloader has downloaded
 # It Holds lists, that have 3 items each:
 # 1) The filename of the .tsv file that was downloaded
@@ -506,11 +493,11 @@ for i in range(len(URL_list)):
     if temp is not None:
         downloaded_files.append(temp)
 
+# IF no files have been downloaded, abort
 if not downloaded_files:
     print("No Data Downloaded, Exiting....")
     mb.showerror("No Data Downloaded", "No Data. \n " + "Exiting...")
     exit(0)
-
 
 # Ask user whether to continue with processing the data
 continue_after_download = mb.askquestion("Continue to data processing ?",
@@ -550,4 +537,3 @@ print("-------  MAKING CHARTS    -------")
 make_charts(cleaned_files, country_codes, country_names)
 
 mb.showinfo("Done!\t\t")
-
