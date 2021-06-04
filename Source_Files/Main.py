@@ -5,7 +5,7 @@
 # And stores it into a mysql database
 # Created by Odysseas papadakis
 # papadako@ceid.upatras.gr
-# AM: 104115
+# AM: 1041152
 # 2021
 
 
@@ -28,7 +28,7 @@ import re
 import mysql.connector
 
 #    _______________________________
-#   |   Main code is at line 437    |
+#   |   Main code is at line 441    |
 #   |_______________________________|
 
 # ------------------------------   DIRECTORY SELECTOR -----------------------------------------------------------
