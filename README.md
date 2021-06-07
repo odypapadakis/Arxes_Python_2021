@@ -11,3 +11,6 @@
 + Stores the data into a csv file
 + Stores the cleaned Data into a MySQL Database
 + Creates charts using the data, using the MatPlotLib python module
+
+
+<img src="Screenshot_plots.png" alt="Image " width="750" height="whatever">
