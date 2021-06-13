@@ -289,7 +289,8 @@ def db_store(list_in):
                 temp += df.iloc[j, i]
 
                 # Delete the whitespace after the df item
-                temp = temp.rstrip(temp[-1])
+                if i != 0:
+                    temp = temp.rstrip(temp[-1])
 
                 sql_insert += temp + "',"
 
